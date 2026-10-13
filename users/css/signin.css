@@ -1,0 +1,43 @@
+
+.auth-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qr-section {
+    text-align: center;
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid #dc2626;
+    border-radius: 15px;
+}
+
+.qr-section h3 {
+    color: #dc2626;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.qr-code {
+    margin: 20px 0;
+}
+
+.qr-placeholder {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.qr-placeholder p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.qr-instruction {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    margin-top: 15px;
+}

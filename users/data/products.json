@@ -1,0 +1,269 @@
+[
+  {
+    "id": "anime-01",
+    "name": "Kaido vs Luffy - Ventus Studio",
+    "price": 13400000,
+    "brand": "Ventus Studio",
+    "category": "anime",
+    "image": "images/kaido-luffy1.jpg",
+    "sold": 24,
+    "description": "Diorama đối đầu giữa Tứ Hoàng Kaido và Luffy Gear 5, tái hiện khoảnh khắc cao trào của trận chiến Wano. Từng đường vân cơ bắp, hiệu ứng mây và ánh sáng được đắp thủ công cực kỳ tỉ mỉ.",
+    "spec": "Tỷ lệ: 1/4 | Kích thước: cao khoảng 65cm | Chất liệu: Resin đúc nguyên khối | Hãng sản xuất: Ventus Studio",
+    "tags": [
+      "anime",
+      "ventus",
+      "onepiece"
+    ],
+    "stock": 8
+  },
+  {
+    "id": "anime-02",
+    "name": "Son Goku SSJ vs Frieza 1/4 - KRC Studio",
+    "price": 4200000,
+    "brand": "KRC Studio",
+    "category": "anime",
+    "image": "images/product2.jpg",
+    "sold": 56,
+    "description": "Mô hình tái hiện trận chiến kinh điển tại Namek giữa Goku Super Saiyan và Frieza, đế diorama đá vỡ cùng hiệu ứng năng lượng phát sáng theo đúng phong cách nguyên tác.",
+    "spec": "Tỷ lệ: 1/4 | Kích thước: cao khoảng 42cm | Chất liệu: PVC cao cấp kết hợp Resin | Hãng sản xuất: KRC Studio",
+    "tags": [
+      "anime",
+      "krc",
+      "dragonball"
+    ],
+    "stock": 5
+  },
+  {
+    "id": "anime-03",
+    "name": "Fushiguro Toji - RD Studio",
+    "price": 8900000,
+    "brand": "RD Studio",
+    "category": "anime",
+    "image": "images/product3.jpg",
+    "sold": 18,
+    "description": "Tạo hình Toji Fushiguro trong tư thế chuẩn bị rút dao găm, thần thái sát khí được khắc họa sắc nét, dành cho fan Jujutsu Kaisen sưu tầm.",
+    "spec": "Tỷ lệ: 1/6 | Kích thước: cao khoảng 30cm | Chất liệu: PVC kết hợp ABS | Hãng sản xuất: RD Studio",
+    "tags": [
+      "anime",
+      "rd",
+      "jjk"
+    ],
+    "stock": 10
+  },
+  {
+    "id": "anime-04",
+    "name": "Natsu Dragneel - GU GU Studio",
+    "price": 7500000,
+    "brand": "GU GU Studio",
+    "category": "anime",
+    "image": "images/product4.webp",
+    "sold": 12,
+    "description": "Natsu trong trạng thái kích hoạt lửa rồng, tạo hình động, hiệu ứng lửa được sơn tay gradient nhiều lớp tạo chiều sâu ấn tượng.",
+    "spec": "Tỷ lệ: 1/6 | Kích thước: cao khoảng 28cm | Chất liệu: PVC sơn tay thủ công | Hãng sản xuất: GU GU Studio",
+    "tags": [
+      "anime",
+      "gugu",
+      "fairytail"
+    ],
+    "stock": 15
+  },
+  {
+    "id": "gundam-01",
+    "name": "RG 1/144 RX-78-2 Gundam Ver. 2.0",
+    "price": 1360000,
+    "brand": "Bandai",
+    "category": "gundam",
+    "image": "images/product5.webp",
+    "sold": 89,
+    "description": "Real Grade tái hiện khung xương nội bộ chi tiết như bản Master Grade thu nhỏ, tem trang trí bằng foil chi tiết cao, biên độ khớp cực kỳ linh hoạt.",
+    "spec": "Tỷ lệ: RG 1/144 | Chiều cao: khoảng 18cm | Chất liệu: Nhựa PS, ABS | Hãng sản xuất: Bandai (Nhật Bản)",
+    "tags": [
+      "gundam",
+      "bandai",
+      "rg"
+    ],
+    "stock": 3
+  },
+  {
+    "id": "gundam-02",
+    "name": "MNP-XH05 Triệu Vân Zhaoyun - Motor Nuclear",
+    "price": 1600000,
+    "brand": "Motor Nuclear",
+    "category": "gundam",
+    "image": "images/product6.webp",
+    "sold": 15,
+    "description": "Mô hình lắp ráp phong cách cơ giáp Tam Quốc, thiết kế nguyên bản kết hợp giữa mecha hiện đại và giáp trụ cổ trang, đi kèm nhiều vũ khí phụ kiện.",
+    "spec": "Tỷ lệ: 1/100 | Chiều cao: khoảng 16cm | Chất liệu: Nhựa ABS, PS | Hãng sản xuất: Motor Nuclear",
+    "tags": [
+      "gundam",
+      "motor-nuclear"
+    ],
+    "stock": 3
+  },
+  {
+    "id": "gundam-03",
+    "name": "Gundam Barbatos Lupus Rex Limited Color Edition",
+    "price": 5600000,
+    "brand": "Bandai",
+    "category": "gundam",
+    "image": "images/product7.jpg",
+    "sold": 33,
+    "description": "Phiên bản giới hạn phối màu đặc biệt của Barbatos Lupus Rex, khung động cơ Frame Astaroth chi tiết, đi kèm vũ khí Mace và khiên cỡ lớn.",
+    "spec": "Tỷ lệ: HG 1/144 | Chiều cao: khoảng 19cm | Chất liệu: Nhựa PS, ABS | Hãng sản xuất: Bandai (Nhật Bản)",
+    "tags": [
+      "gundam",
+      "bandai",
+      "hg"
+    ],
+    "stock": 0
+  },
+  {
+    "id": "gundam-04",
+    "name": "PG 1/60 Gundam Astray Red Frame",
+    "price": 4320000,
+    "brand": "Bandai",
+    "category": "gundam",
+    "image": "images/product8.webp",
+    "sold": 21,
+    "description": "Perfect Grade với nội thất khung xương kim loại giả lập đầy đủ, tương thích hệ thống đèn LED, độ tách màu không cần sơn ở mức cao nhất trong dòng Gunpla.",
+    "spec": "Tỷ lệ: PG 1/60 | Chiều cao: khoảng 27cm | Chất liệu: Nhựa PS, ABS, lõi kim loại | Hãng sản xuất: Bandai (Nhật Bản)",
+    "tags": [
+      "gundam",
+      "bandai",
+      "pg"
+    ],
+    "stock": 20
+  },
+  {
+    "id": "car-01",
+    "name": "Lamborghini Aventador 1:18",
+    "price": 3200000,
+    "brand": "Lamborghini",
+    "category": "car",
+    "image": "images/product9.jpg",
+    "sold": 41,
+    "description": "Mô hình siêu xe Aventador tỉ lệ lớn, mở được 2 cửa cắt kéo đặc trưng, nắp capo và cốp sau, nội thất được tái hiện chi tiết đến từng đường chỉ.",
+    "spec": "Tỷ lệ: 1/18 | Kích thước: dài khoảng 26cm | Chất liệu: Hợp kim Diecast, lốp cao su | Hãng sản xuất: Lamborghini (License chính hãng)",
+    "tags": [
+      "car",
+      "lamborghini",
+      "1-18"
+    ],
+    "stock": 12
+  },
+  {
+    "id": "car-02",
+    "name": "Ferrari F8 Tributo 1:18",
+    "price": 3500000,
+    "brand": "Ferrari",
+    "category": "car",
+    "image": "images/product10.jpg",
+    "sold": 37,
+    "description": "Đường nét khí động học của F8 Tributo được tái hiện chuẩn xác, lớp sơn 2K bóng gương, vô lăng và bánh xe xoay chuyển linh hoạt theo tay lái.",
+    "spec": "Tỷ lệ: 1/18 | Kích thước: dài khoảng 25cm | Chất liệu: Hợp kim Diecast pha nhựa ABS | Hãng sản xuất: Ferrari (License chính hãng)",
+    "tags": [
+      "car",
+      "ferrari",
+      "1-18"
+    ],
+    "stock": 3
+  },
+  {
+    "id": "car-03",
+    "name": "BMW M8 Competition 1:18",
+    "price": 2800000,
+    "brand": "BMW",
+    "category": "car",
+    "image": "images/product11.jpg",
+    "sold": 29,
+    "description": "Coupe thể thao hạng sang với lưới tản nhiệt kidney-grille đặc trưng, hệ thống treo lò xo thật, cửa xe đóng mở êm và chắc chắn.",
+    "spec": "Tỷ lệ: 1/18 | Kích thước: dài khoảng 24cm | Chất liệu: Hợp kim Diecast | Hãng sản xuất: BMW (License chính hãng)",
+    "tags": [
+      "car",
+      "bmw",
+      "1-18"
+    ],
+    "stock": 8
+  },
+  {
+    "id": "car-04",
+    "name": "Porsche 911 GT3 RS 1:18",
+    "price": 3100000,
+    "brand": "Porsche",
+    "category": "car",
+    "image": "images/product12.jpg",
+    "sold": 45,
+    "description": "Phiên bản đua đường trường với cánh gió sau cỡ lớn, la-zăng đa chấu sơn màu tương phản, tem đua thể thao được in sắc nét từng chi tiết.",
+    "spec": "Tỷ lệ: 1/18 | Kích thước: dài khoảng 24cm | Chất liệu: Hợp kim Diecast | Hãng sản xuất: Porsche (License chính hãng)",
+    "tags": [
+      "car",
+      "porsche",
+      "1-18"
+    ],
+    "stock": 12
+  },
+  {
+    "id": "tools-01",
+    "name": "Dụng cụ mô hình Gundam kèm kìm cắt - Nanye",
+    "price": 150000,
+    "brand": "Nanye",
+    "category": "tools",
+    "image": "images/product13.webp",
+    "sold": 67,
+    "description": "Bộ dụng cụ cơ bản dành cho người mới chơi mô hình, gồm kìm cắt lưỡi đơn cùng phụ kiện hỗ trợ tách chi tiết khỏi khung nhựa nhanh và gọn.",
+    "spec": "Thành phần: 1 kìm cắt + phụ kiện đi kèm | Chất liệu lưỡi: Thép hợp kim | Thích hợp: Nhựa PS, ABS",
+    "tags": [
+      "tools",
+      "kim-cat"
+    ],
+    "stock": 3
+  },
+  {
+    "id": "tools-02",
+    "name": "Hộp đựng và bảo quản dụng cụ lắp ráp",
+    "price": 340000,
+    "brand": "Chính hãng",
+    "category": "tools",
+    "image": "images/product14.webp",
+    "sold": 22,
+    "description": "Hộp nhựa nhiều ngăn giúp sắp xếp kìm, dao, giũa, cọ sơn gọn gàng, có khay chia ngăn tháo rời tùy chỉnh theo nhu cầu sử dụng.",
+    "spec": "Kích thước: 30 x 20 x 8cm | Chất liệu: Nhựa PP cứng, khóa cài nhựa | Số ngăn: tùy chỉnh tháo lắp",
+    "tags": [
+      "tools",
+      "hop-dung"
+    ],
+    "stock": 0
+  },
+  {
+    "id": "tools-03",
+    "name": "Dụng cụ dũa mông tay đánh bóng - Fabiyan",
+    "price": 450000,
+    "brand": "Fabiyan",
+    "category": "tools",
+    "image": "images/product15.webp",
+    "sold": 30,
+    "description": "Bộ giũa và mút đánh bóng nhiều độ nhám, chuyên xử lý bề mặt nhựa sau khi cắt gọt để bề mặt mô hình mịn màng trước khi lên sơn.",
+    "spec": "Thành phần: 5 cây giũa + 4 miếng mút đánh bóng | Độ nhám: nhiều cấp độ | Thích hợp: Nhựa PS, ABS, Resin",
+    "tags": [
+      "tools",
+      "dua"
+    ],
+    "stock": 12
+  },
+  {
+    "id": "tools-04",
+    "name": "Dao gọt nhựa thừa (Bộ 13 lưỡi - 3 cán)",
+    "price": 190000,
+    "brand": "Chính hãng",
+    "category": "tools",
+    "image": "images/product16.jpg",
+    "sold": 54,
+    "description": "Bộ dao khắc đa năng dùng để xử lý vết ghẻ (nub mark) sau khi cắt mô hình, đi kèm hộp đựng có dải nam châm giữ lưỡi dao chắc chắn.",
+    "spec": "Thành phần: 3 cán nhôm + 13 lưỡi dao hình dáng khác nhau | Đóng gói: hộp nhựa có dải nam châm | Thích hợp: Nhựa PS, ABS, PP",
+    "tags": [
+      "tools",
+      "dao-cat"
+    ],
+    "stock": 5
+  }
+]

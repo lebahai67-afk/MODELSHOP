@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Thống kê - Trang quản trị - MODEL SHOP</title>
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/admin-responsive.css">
+    <!--
+        Trang admin MẶC ĐỊNH ẨN nội dung (xem CSS .admin-shell { display: none } trong admin.css)
+        và chỉ hiện #authOverlay ở giữa màn hình. admin-guard.js (nạp cuối trang) sẽ kiểm tra quyền
+        truy cập:
+          - Nếu đúng admin -> thêm class .auth-ok vào <body> -> ẩn overlay, hiện nội dung.
+          - Nếu sai quyền  -> cập nhật nội dung overlay thành thông báo lỗi + nút đăng nhập,
+                              tự chuyển về trang đăng nhập sau 5 giây.
+    -->
+    <meta name="robots" content="noindex, nofollow">
+</head>
+
+<body>
+
+    <div class="auth-overlay" id="authOverlay">
+        <div class="spinner"></div>
+        <div class="msg" id="authMsg">Đang kiểm tra quyền truy cập...</div>
+        <div class="actions" id="authActions" style="display:none;">
+            <a href="../users/signin.html">Đăng nhập</a>
+            <a href="../users/index.html" class="secondary">Về trang chủ</a>
+        </div>
+    </div>
+
+    <div class="admin-shell">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Mở menu"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#menu"/></svg></button>
+        <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+        <aside class="admin-sidebar" id="adminSidebar">
+            <a href="../users/index.html" class="sidebar-logo">
+                <img src="../users/images/logo.png" alt="Logo">
+                <span><span class="hl">MODEL</span>SHOP</span>
+            </a>
+            <div class="sidebar-sub">/ Trang quản trị</div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#layout-dashboard"/></svg>Tổng quan</a>
+                <a href="statistics.html" class="active"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#chart-line"/></svg>Thống kê</a>
+                <a href="products.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#package"/></svg>Sản phẩm</a>
+                <a href="inventory.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#warehouse"/></svg>Kho hàng</a>
+                <a href="orders.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#truck"/></svg>Đơn hàng</a>
+                <a href="reviews.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#star"/></svg>Đánh giá</a>
+                <a href="vouchers.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#ticket"/></svg>Mã giảm giá</a>
+                <a href="chats.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#message-circle"/></svg>Hỏi đáp</a>
+                <a href="customers.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#users"/></svg>Khách hàng</a>
+                <a href="notifications.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#bell"/></svg>Thông báo</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="../users/index.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#store"/></svg>Xem cửa hàng</a>
+                <button class="logout-btn" id="logoutBtn"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#log-out"/></svg> Đăng xuất</button>
+            </div>
+        </aside>
+
+        <main class="admin-main">
+            <div class="admin-wrap">
+                <div class="admin-section-head" style="margin-bottom:2px;">
+                    <h1 class="admin-page-title" style="margin-bottom:0;">Thống kê</h1>
+                    <button class="btn btn-ghost" id="exportCsvBtn"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#download"/></svg> Xuất báo cáo (CSV)</button>
+                </div>
+                <p style="color:#999; font-size:13px; margin-top:6px; margin-bottom:24px;">
+                    Số liệu tính theo các đơn hàng KHÔNG ở trạng thái "Đã hủy". Biểu đồ tự cập nhật real-time
+                    khi có đơn hàng mới hoặc đổi trạng thái.
+                </p>
+
+                <div class="stats">
+                    <div class="stat-box">
+                        <div class="num" id="statRevenue">0đ</div>
+                        <div class="label">Tổng doanh thu (kỳ đang xem)</div>
+                        <div class="stat-delta" id="statRevenueDelta"></div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="num" id="statOrderCount">0</div>
+                        <div class="label">Tổng đơn hợp lệ</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="num" id="statAvgOrder">0đ</div>
+                        <div class="label">Giá trị đơn trung bình</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="num" id="statDoneCount">0</div>
+                        <div class="label">Đơn đã hoàn thành</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="num" id="statItemsSold">0</div>
+                        <div class="label">Sản phẩm đã bán</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="num" id="statCancelRate">0%</div>
+                        <div class="label">Tỷ lệ huỷ đơn</div>
+                    </div>
+                </div>
+
+                <div class="chart-grid">
+                    <div class="admin-section">
+                        <div class="admin-section-head">
+                            <h3>Doanh thu theo thời gian</h3>
+                            <div class="chart-range-tabs" id="revenueRangeTabs">
+                                <button type="button" data-range="d7" class="active">7 ngày</button>
+                                <button type="button" data-range="d30">30 ngày</button>
+                                <button type="button" data-range="m12">12 tháng</button>
+                                <button type="button" data-range="q8">Theo quý</button>
+                                <button type="button" data-range="y5">Theo năm</button>
+                            </div>
+                        </div>
+                        <div class="chart-box">
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="admin-section">
+                        <div class="admin-section-head">
+                            <h3>Trạng thái đơn hàng</h3>
+                        </div>
+                        <div class="chart-box">
+                            <canvas id="statusChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="admin-section">
+                    <div class="admin-section-head">
+                        <h3>Sản phẩm bán chạy nổi bật</h3>
+                        <span style="color:#999; font-size:12.5px;">Xếp hạng theo số lượng bán (toàn thời gian, đơn hợp lệ)</span>
+                    </div>
+                    <div class="top-products-showcase" id="topProductsShowcase">
+                        <!-- render bằng JS -->
+                    </div>
+                </div>
+
+                <div class="admin-section">
+                    <div class="admin-section-head">
+                        <h3>Sản phẩm được yêu thích nhiều nhất</h3>
+                        <span style="color:#999; font-size:12.5px;">Dữ liệu tham khảo để nhập hàng - tính theo số khách đã thêm vào danh sách yêu thích</span>
+                    </div>
+                    <table>
+                        <thead><tr><th>#</th><th>Sản phẩm</th><th>Danh mục</th><th>Tồn kho</th><th>Lượt yêu thích</th></tr></thead>
+                        <tbody id="wishlistTableBody"><tr><td colspan="5" class="empty">Đang tải...</td></tr></tbody>
+                    </table>
+                </div>
+
+                <div class="chart-grid" style="grid-template-columns: 1fr 1fr;">
+                    <div class="admin-section">
+                        <div class="admin-section-head">
+                            <h3>Doanh thu theo danh mục</h3>
+                        </div>
+                        <div class="chart-box">
+                            <canvas id="categoryChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="admin-section">
+                        <div class="admin-section-head">
+                            <h3>Top 5 khách hàng chi tiêu nhiều nhất</h3>
+                        </div>
+                        <div id="topCustomersList" class="top-customers-list">
+                            <!-- render bằng JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <script src="../users/js/firebase-config.js"></script>
+    <script src="../users/js/auth-service.js"></script>
+    <script src="js/admin-guard.js"></script>
+    <script src="../users/js/shop-core.js"></script>
+    <script src="js/admin-sidebar.js"></script>
+    <script src="js/statistics.js"></script>
+    <script src="js/admin-mobile.js"></script>
+</body>
+
+</html>

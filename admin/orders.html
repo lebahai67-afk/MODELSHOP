@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Quản lý đơn hàng - Trang quản trị - MODEL SHOP</title>
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/admin-responsive.css">
+    <!--
+        Trang admin MẶC ĐỊNH ẨN nội dung (xem CSS .admin-shell { display: none } trong admin.css)
+        và chỉ hiện #authOverlay ở giữa màn hình. admin-guard.js (nạp cuối trang) sẽ kiểm tra quyền
+        truy cập:
+          - Nếu đúng admin -> thêm class .auth-ok vào <body> -> ẩn overlay, hiện nội dung.
+          - Nếu sai quyền  -> cập nhật nội dung overlay thành thông báo lỗi + nút đăng nhập,
+                              tự chuyển về trang đăng nhập sau 5 giây.
+    -->
+    <meta name="robots" content="noindex, nofollow">
+</head>
+
+<body>
+
+    <div class="auth-overlay" id="authOverlay">
+        <div class="spinner"></div>
+        <div class="msg" id="authMsg">Đang kiểm tra quyền truy cập...</div>
+        <div class="actions" id="authActions" style="display:none;">
+            <a href="../users/signin.html">Đăng nhập</a>
+            <a href="../users/index.html" class="secondary">Về trang chủ</a>
+        </div>
+    </div>
+
+    <div class="admin-shell">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Mở menu"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#menu"/></svg></button>
+        <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+        <aside class="admin-sidebar" id="adminSidebar">
+            <a href="../users/index.html" class="sidebar-logo">
+                <img src="../users/images/logo.png" alt="Logo">
+                <span><span class="hl">MODEL</span>SHOP</span>
+            </a>
+            <div class="sidebar-sub">/ Trang quản trị</div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#layout-dashboard"/></svg>Tổng quan</a>
+                <a href="statistics.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#chart-line"/></svg>Thống kê</a>
+                <a href="products.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#package"/></svg>Sản phẩm</a>
+                <a href="inventory.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#warehouse"/></svg>Kho hàng</a>
+                <a href="orders.html" class="active"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#truck"/></svg>Đơn hàng</a>
+                <a href="reviews.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#star"/></svg>Đánh giá</a>
+                <a href="vouchers.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#ticket"/></svg>Mã giảm giá</a>
+                <a href="chats.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#message-circle"/></svg>Hỏi đáp</a>
+                <a href="customers.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#users"/></svg>Khách hàng</a>
+                <a href="notifications.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#bell"/></svg>Thông báo</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="../users/index.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#store"/></svg>Xem cửa hàng</a>
+                <button class="logout-btn" id="logoutBtn"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#log-out"/></svg> Đăng xuất</button>
+            </div>
+        </aside>
+
+        <main class="admin-main">
+            <div class="admin-wrap">
+                <h1 class="admin-page-title">Quản lý đơn hàng</h1>
+                <p style="color:#999; font-size:13px; margin-top:-16px; margin-bottom:24px;">
+                    Shop chưa tích hợp định vị/shipper thật nên trạng thái đơn hàng do admin tự cập nhật thủ công ở đây.
+                    Khách chỉ được đánh giá sản phẩm SAU KHI tự bấm "Đã nhận hàng" trên đơn ở trạng thái "Đang giao".
+                </p>
+
+                <div class="admin-section">
+                    <div class="admin-section-head">
+                        <div class="form-field" style="min-width:260px; margin:0;">
+                            <input type="text" id="searchBox" placeholder="Tìm theo mã đơn / tên khách hàng...">
+                        </div>
+                    </div>
+
+                    <div class="order-tabs" id="orderTabs">
+                        <button type="button" class="order-tab active" data-status="all">Tất cả</button>
+                        <button type="button" class="order-tab" data-status="Chờ xác nhận">Chờ xác nhận</button>
+                        <button type="button" class="order-tab" data-status="Đang giao">Đang giao</button>
+                        <button type="button" class="order-tab" data-status="Hoàn thành">Hoàn thành</button>
+                        <button type="button" class="order-tab" data-status="Yêu cầu trả hàng">Yêu cầu trả hàng</button>
+                        <button type="button" class="order-tab" data-status="Đã trả hàng">Đã trả hàng</button>
+                        <button type="button" class="order-tab" data-status="Đã hủy">Đã hủy</button>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Mã đơn</th>
+                                <th>Khách hàng</th>
+                                <th>Số SP</th>
+                                <th>Tổng tiền</th>
+                                <th>Trạng thái</th>
+                                <th>Ngày đặt</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="orderTableBody">
+                            <!-- render bằng JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ===== MODAL CHI TIẾT ĐƠN HÀNG ===== -->
+    <div class="modal-overlay" id="orderModal">
+        <div class="modal-box" style="max-width:560px;">
+            <h3 id="modalOrderId">Chi tiết đơn hàng</h3>
+
+            <div class="order-detail-block">
+                <h4>Trạng thái hiện tại</h4>
+                <p><span class="badge" id="modalStatusBadge"></span></p>
+
+                <label style="display:block; font-size:12.5px; color:#bbb; margin:12px 0 6px; font-weight:600;">
+                    Chọn trạng thái mới (admin toàn quyền chỉnh tay)
+                </label>
+                <select id="modalStatusSelect" style="width:100%; padding:10px 12px; border-radius:8px;
+                    border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.05); color:#fff; font-size:14px;">
+                    <option value="Chờ xác nhận">Chờ xác nhận</option>
+                    <option value="Đang giao">Đang giao</option>
+                    <option value="Hoàn thành">Hoàn thành</option>
+                    <option value="Yêu cầu trả hàng">Yêu cầu trả hàng</option>
+                    <option value="Đã trả hàng">Đã trả hàng</option>
+                    <option value="Đã hủy">Đã hủy</option>
+                </select>
+            </div>
+
+            <div class="order-detail-block">
+                <h4>Người nhận</h4>
+                <p id="modalCustomerInfo"></p>
+            </div>
+
+            <div class="order-detail-block">
+                <h4>Sản phẩm</h4>
+                <div id="modalItemsList"></div>
+            </div>
+
+            <div class="order-detail-block">
+                <div class="order-total-row"><span>Tạm tính</span><span id="modalSubtotal"></span></div>
+                <div class="order-total-row"><span>Phí vận chuyển</span><span id="modalShipping"></span></div>
+                <div class="order-total-row grand"><span>Tổng cộng</span><span id="modalTotal"></span></div>
+                <p style="margin-top:8px;">Thanh toán: <b id="modalPayment"></b></p>
+                <div id="modalReturnReasonWrap" style="display:none;">
+                    <p>Lý do trả hàng: <b id="modalReturnReason"></b></p>
+                    <div id="modalReturnImages" style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;"></div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn btn-ghost" id="modalCloseBtn">Đóng</button>
+                <button type="button" class="btn btn-primary" id="modalActionBtn">Cập nhật trạng thái</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+    <script src="../users/js/firebase-config.js"></script>
+    <script src="../users/js/auth-service.js"></script>
+    <script src="js/admin-guard.js"></script>
+    <script src="../users/js/shop-core.js"></script>
+    <script src="js/admin-sidebar.js"></script>
+    <script src="js/orders.js"></script>
+    <script src="js/admin-mobile.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,258 @@
+/* ============================================================
+   auth.css
+   CSS dùng chung cho trang signin.html và signup.html
+   ============================================================ */
+
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #1a0000 0%, #2d1515 50%, #1a0000 100%);
+    color: white;
+    min-height: 100vh;
+}
+
+/* ===== HEADER AUTH ===== */
+.header {
+    background: linear-gradient(to bottom, #4a0000, #ff2a2a);
+    padding: 30px 40px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.auth-logo-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.logo-text {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.logo-text span {
+    color: #1a1a1a;
+}
+
+.header-link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    color: white;
+}
+
+/* ===== LAYOUT ===== */
+.main-container {
+    display: flex;
+    max-width: 1400px;
+    margin: 60px auto;
+    padding: 0 20px;
+    gap: 100px;
+}
+
+.form-section {
+    flex: 0 0 500px;
+}
+
+/* ===== FORM BOX ===== */
+.form-box {
+    background: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 1);
+    border-radius: 15px;
+    padding: 40px;
+}
+
+.form-title {
+    color: #dc2626;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+}
+
+/* ===== INPUTS ===== */
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+    width: 100%;
+    padding: 14px 18px;
+    margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+input:focus {
+    outline: none;
+    border-color: #dc2626;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* FIX: trình duyệt autofill (gợi ý điền sẵn email/mật khẩu đã lưu) ép nền ô
+   input thành màu trắng, trong khi chữ đang là màu trắng (color: white ở trên)
+   -> chữ "biến mất". Dùng box-shadow để vẽ đè nền tối, và -webkit-text-fill-color
+   để ép màu chữ (set color thường không thắng được autofill). */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    -webkit-text-fill-color: white;
+    -webkit-box-shadow: 0 0 0px 1000px #1a1a1a inset;
+    box-shadow: 0 0 0px 1000px #1a1a1a inset;
+    transition: background-color 9999s ease-in-out 0s;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: auto;
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+.checkbox-group label {
+    cursor: pointer;
+}
+
+/* ===== BUTTON ===== */
+.btn-primary {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(to right, #b91c1c, #dc2626);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(220, 38, 38, 0.4);
+}
+
+/* ===== MESSAGE ===== */
+.message {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    display: none;
+    font-weight: 600;
+}
+
+.message.error {
+    background: rgba(220, 38, 38, 0.2);
+    border: 1px solid #dc2626;
+    color: #ff5555;
+}
+
+.message.success {
+    background: rgba(34, 197, 94, 0.2);
+    border: 1px solid #22c55e;
+    color: #4ade80;
+}
+
+/* ===== DIVIDER & SOCIAL ===== */
+.divider {
+    text-align: center;
+    margin: 25px 0;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 13px;
+}
+
+.social-login {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.social-btn {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.social-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.social-btn.facebook-btn:hover,
+.social-btn.zalo-btn:hover {
+    background: rgba(255, 0, 0, 0.1);
+    border-color: #ff0000;
+}
+
+.social-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+/* ===== SWITCH LINK ===== */
+.switch-link {
+    text-align: center;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.switch-link a {
+    color: #dc2626;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.switch-link a:hover {
+    text-decoration: underline;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+    .main-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+    }
+
+    .form-section {
+        flex: 1;
+        max-width: 500px;
+    }
+}

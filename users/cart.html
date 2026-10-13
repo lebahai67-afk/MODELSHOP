@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Giỏ hàng - MODEL SHOP</title>
+    <link rel="stylesheet" href="css/cart.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <meta name="theme-color" content="#5a0000">
+    <meta name="description" content="Giỏ hàng của bạn tại MODEL SHOP.">
+    <meta name="robots" content="noindex, follow">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="48x48" href="images/icons/favicon-48.png">
+    <link rel="apple-touch-icon" href="images/icons/apple-touch-icon.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="MODEL SHOP">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta property="og:site_name" content="MODEL SHOP">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Giỏ hàng - MODEL SHOP">
+    <meta property="og:description" content="Giỏ hàng của bạn tại MODEL SHOP.">
+    <meta property="og:image" content="images/banner1.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://firestore.googleapis.com">
+    <script src="js/pwa.js" defer></script>
+    <script src="js/a11y.js" defer></script>
+</head>
+
+<body>
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <!-- TOP BAR -->
+        <div class="top-bar">
+            <ul class="top-bar-items">
+                <li><a href="#">Thông báo</a></li>
+                <li class="auth">
+                    <a href="signin.html">Đăng nhập</a>
+                    <span class="slash">/</span>
+                    <a href="signup.html">Đăng ký</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- MIDDLE BAR -->
+        <div class="middle-bar">
+            <div class="top-row">
+                <!-- LOGO -->
+                <a href="index.html" class="logo">
+                    <img src="images/logo.png" alt="Logo" class="logo-img">
+                    <div class="logo-text">MODEL<span>SHOP</span></div>
+                </a>
+
+                <!-- SEARCH + MENU WRAPPER -->
+                <div class="search-menu-wrapper">
+                    <!-- SEARCH BAR -->
+                    <div class="search-bar">
+                        <input type="text" id="siteSearchInput" placeholder="Tìm kiếm mô hình, gundam, siêu xe...">
+                        <button class="search-btn" id="siteSearchBtn" aria-label="Tìm kiếm"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#search"/></svg></button>
+                    </div>
+
+                    <!-- MENU -->
+                    <ul class="menu-items">
+                        <li><a href="products-anime.html">Mô hình Anime</a></li>
+                        <li><a href="products-gundam.html">Gundam</a></li>
+                        <li><a href="products-car.html">Siêu xe</a></li>
+                        <li><a href="products-tools.html">Dụng cụ</a></li>
+                    </ul>
+                </div>
+
+                <!-- CART -->
+                <a href="cart.html" class="cart">
+                    <span class="cart-icon"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#shopping-cart"/></svg></span>
+                    <span>Giỏ hàng</span>
+                    <span class="cart-count-badge" id="global-cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+    <div class="cart-container">
+        <h1 class="cart-title">GIỎ HÀNG CỦA BẠN</h1>
+
+        <!-- Thông báo lưu ý -->
+        <div class="cart-notice">
+            <div class="cart-notice-title">
+                <div class="cart-notice-icon">!</div>
+            </div>
+            <div class="cart-notice-text">
+                Bạn vui lòng <strong>kiểm tra kỹ số lượng và loại sản phẩm</strong> trước khi tiến hành đặt hàng và
+                thanh toán. Đơn hàng sẽ được xử lý ngay sau khi xác nhận thành công.
+            </div>
+        </div>
+
+        <!-- Bảng sản phẩm -->
+        <div class="cart-table-wrapper">
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>
+                            <label class="select-all-label">
+                                <input type="checkbox" class="product-checkbox" id="selectAll"
+                                    onchange="toggleSelectAll()">
+                                <span>Tất cả</span>
+                            </label>
+                        </th>
+                        <th colspan="2">Thông tin sản phẩm</th>
+                        <th>Đơn giá</th>
+                        <th>Số lượng</th>
+                        <th>Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody id="cartTbody">
+                    <!-- Render động bằng JS từ localStorage.cart (js/cart.js) -->
+                </tbody>
+            </table>
+            <div class="cart-empty" id="cartEmpty" style="display:none; text-align:center; padding:60px 20px; color:#999;">
+                <svg class="icon icon-xl" aria-hidden="true"><use href="images/icons/lucide.svg#shopping-cart"/></svg><br>Giỏ hàng của bạn đang trống.<br>
+                <a href="index.html" style="color:#ff2a2a; text-decoration:underline;">Tiếp tục mua sắm</a>
+            </div>
+        </div>
+
+        <!-- Tổng tiền và thanh toán -->
+        <div class="cart-coupon">
+            <label for="cartVoucher">Mã giảm giá</label>
+            <div class="cart-coupon-row">
+                <input type="text" id="cartVoucher" placeholder="Nhập mã (vd: SALE10)" autocomplete="off" autocapitalize="characters">
+                <button type="button" id="cartVoucherBtn">Áp dụng</button>
+            </div>
+            <div id="cartVoucherMsg" class="cart-coupon-msg" aria-live="polite"></div>
+        </div>
+
+        <div class="cart-summary">
+            <div class="summary-item">
+                <span class="summary-label">Tổng tiền (<span id="totalItems">0</span> sản phẩm):</span>
+                <span class="summary-value" id="grandTotal">0đ</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">THANH TOÁN</button>
+        </div>
+    </div>
+
+    <div class="chat-box"></div>
+
+    <script src="js/site-search.js"></script>
+    <script src="js/auth-header.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth-service.js"></script>
+    <script src="js/shop-core.js"></script>
+    <script src="js/ai-assistant.js"></script>
+    <script src="js/chat-widget.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/cart-coupon.js"></script>
+
+    <script src="js/bottom-nav.js"></script>
+</body>
+
+</html>

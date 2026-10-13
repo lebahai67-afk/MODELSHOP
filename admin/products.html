@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Quản lý sản phẩm - Trang quản trị - MODEL SHOP</title>
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/admin-responsive.css">
+    <!--
+        Trang admin MẶC ĐỊNH ẨN nội dung (xem CSS .admin-shell { display: none } trong admin.css)
+        và chỉ hiện #authOverlay ở giữa màn hình. admin-guard.js (nạp cuối trang) sẽ kiểm tra quyền
+        truy cập:
+          - Nếu đúng admin -> thêm class .auth-ok vào <body> -> ẩn overlay, hiện nội dung.
+          - Nếu sai quyền  -> cập nhật nội dung overlay thành thông báo lỗi + nút đăng nhập,
+                              tự chuyển về trang đăng nhập sau 5 giây.
+    -->
+    <meta name="robots" content="noindex, nofollow">
+</head>
+
+<body>
+
+    <div class="auth-overlay" id="authOverlay">
+        <div class="spinner"></div>
+        <div class="msg" id="authMsg">Đang kiểm tra quyền truy cập...</div>
+        <div class="actions" id="authActions" style="display:none;">
+            <a href="../users/signin.html">Đăng nhập</a>
+            <a href="../users/index.html" class="secondary">Về trang chủ</a>
+        </div>
+    </div>
+
+    <div class="admin-shell">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Mở menu"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#menu"/></svg></button>
+        <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+        <aside class="admin-sidebar" id="adminSidebar">
+            <a href="../users/index.html" class="sidebar-logo">
+                <img src="../users/images/logo.png" alt="Logo">
+                <span><span class="hl">MODEL</span>SHOP</span>
+            </a>
+            <div class="sidebar-sub">/ Trang quản trị</div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#layout-dashboard"/></svg>Tổng quan</a>
+                <a href="statistics.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#chart-line"/></svg>Thống kê</a>
+                <a href="products.html" class="active"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#package"/></svg>Sản phẩm</a>
+                <a href="inventory.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#warehouse"/></svg>Kho hàng</a>
+                <a href="orders.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#truck"/></svg>Đơn hàng</a>
+                <a href="reviews.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#star"/></svg>Đánh giá</a>
+                <a href="vouchers.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#ticket"/></svg>Mã giảm giá</a>
+                <a href="chats.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#message-circle"/></svg>Hỏi đáp</a>
+                <a href="customers.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#users"/></svg>Khách hàng</a>
+                <a href="notifications.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#bell"/></svg>Thông báo</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="../users/index.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#store"/></svg>Xem cửa hàng</a>
+                <button class="logout-btn" id="logoutBtn"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#log-out"/></svg> Đăng xuất</button>
+            </div>
+        </aside>
+
+        <main class="admin-main">
+            <div class="admin-wrap">
+                <h1 class="admin-page-title">Quản lý sản phẩm</h1>
+
+                <div class="admin-section">
+                    <div class="admin-section-head">
+                        <div class="form-field" style="min-width:260px; margin:0;">
+                            <input type="text" id="searchBox" placeholder="Tìm theo tên sản phẩm...">
+                        </div>
+                        <button class="btn btn-primary" id="addProductBtn">+ Thêm sản phẩm</button>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Ảnh</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Danh mục</th>
+                                <th>Giá</th>
+                                <th>Tồn kho</th>
+                                <th>Trạng thái</th>
+                                <th>Đã bán</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="productTableBody">
+                            <!-- render bằng JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ===== MODAL THÊM / SỬA SẢN PHẨM ===== -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal-box">
+            <h3 id="modalTitle">Thêm sản phẩm mới</h3>
+            <form id="productForm">
+                <div class="form-grid">
+                    <div class="form-field full">
+                        <label>Ảnh sản phẩm (dùng chung cho thẻ danh sách và trang chi tiết)</label>
+                        <input type="file" id="f_image" accept="image/*">
+                        <img id="imgPreview" src="" alt="Xem trước"
+                            style="display:none; margin-top:10px; max-height:140px; border-radius:8px;">
+                        <div class="form-hint">Ảnh sẽ được lưu trực tiếp trong trình duyệt (localStorage) - hợp cho
+                            vài chục sản phẩm demo.</div>
+                    </div>
+
+                    <div class="form-field full">
+                        <label>Ảnh phụ (tuỳ chọn, tối đa 4 ảnh)</label>
+                        <input type="file" id="f_images" accept="image/*" multiple>
+                        <div id="extraPreview" class="extra-preview"></div>
+                        <button type="button" class="btn" id="clearExtraBtn" style="display:none; margin-top:8px;">Xoá ảnh phụ</button>
+                        <div class="form-hint">Có từ 2 ảnh trở lên, trang chi tiết sẽ hiện thư viện ảnh vuốt ngang.
+                            Ảnh tự được thu nhỏ còn 900px để nhẹ dữ liệu.</div>
+                    </div>
+
+                    <div class="form-field full">
+                        <label>Tên sản phẩm *</label>
+                        <input type="text" id="f_name" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label>Danh mục *</label>
+                        <select id="f_category" required>
+                            <option value="anime">Mô hình Anime</option>
+                            <option value="gundam">Gundam</option>
+                            <option value="car">Siêu xe</option>
+                            <option value="tools">Dụng cụ</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label>Hãng / Thương hiệu</label>
+                        <input type="text" id="f_brand">
+                    </div>
+
+                    <div class="form-field">
+                        <label>Giá gốc (đ) *</label>
+                        <input type="number" id="f_price" min="0" step="1000" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label>Giá khuyến mãi (đ)</label>
+                        <input type="number" id="f_salePrice" min="0" step="1000" placeholder="Bỏ trống nếu không KM">
+                    </div>
+
+                    <div class="form-field full">
+                        <label>Tags (cách nhau bằng dấu phẩy, dùng để lọc & tìm kiếm)</label>
+                        <input type="text" id="f_tags" placeholder="vd: gundam, bandai, hg">
+                    </div>
+
+                    <div class="form-field full">
+                        <label>Mô tả</label>
+                        <textarea id="f_description"></textarea>
+                    </div>
+
+                    <div class="form-field full">
+                        <label>Thông số kỹ thuật</label>
+                        <textarea id="f_spec"></textarea>
+                    </div>
+
+                    <div class="form-field full" id="stockFieldWrap" style="display:none;">
+                        <label>Tồn kho hiện tại</label>
+                        <input type="number" id="f_stock" min="0" step="1" disabled>
+                        <div class="form-hint">Chỉnh số lượng tồn kho ở trang <a href="inventory.html"
+                                style="color:#ff8080;">Kho hàng</a> (Nhập kho / Xuất kho) để lưu lại lịch sử,
+                            không sửa trực tiếp ở đây.</div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-ghost" id="modalCancelBtn">Huỷ</button>
+                    <button type="submit" class="btn btn-primary">Lưu sản phẩm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+    <script src="../users/js/firebase-config.js"></script>
+    <script src="../users/js/auth-service.js"></script>
+    <script src="js/admin-guard.js"></script>
+    <script src="../users/js/shop-core.js"></script>
+    <script src="js/admin-sidebar.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/admin-mobile.js"></script>
+</body>
+
+</html>

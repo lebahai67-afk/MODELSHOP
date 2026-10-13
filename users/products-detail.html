@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Chi tiết sản phẩm - MODEL SHOP</title>
+
+    <link rel="stylesheet" href="css/products-detail.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <meta name="theme-color" content="#5a0000">
+    <meta name="description" content="Xem thông tin, giá và đánh giá sản phẩm tại MODEL SHOP.">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="48x48" href="images/icons/favicon-48.png">
+    <link rel="apple-touch-icon" href="images/icons/apple-touch-icon.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="MODEL SHOP">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta property="og:site_name" content="MODEL SHOP">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Chi tiết sản phẩm - MODEL SHOP">
+    <meta property="og:description" content="Xem thông tin, giá và đánh giá sản phẩm tại MODEL SHOP.">
+    <meta property="og:image" content="images/banner1.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://firestore.googleapis.com">
+    <script src="js/pwa.js" defer></script>
+    <script src="js/a11y.js" defer></script>
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="top-bar">
+            <ul class="top-bar-items">
+                <li><a href="#">Thông báo</a></li>
+                <li class="auth">
+                    <a href="signin.html">Đăng nhập</a>
+                    <span class="slash">/</span>
+                    <a href="signup.html">Đăng ký</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="middle-bar">
+            <div class="top-row">
+                <a href="index.html" class="logo">
+                    <img src="images/logo.png" alt="Logo" class="logo-img">
+                    <div class="logo-text">MODEL<span>SHOP</span></div>
+                </a>
+
+                <div class="search-menu-wrapper">
+                    <div class="search-bar">
+                        <input type="text" id="siteSearchInput" placeholder="Tìm kiếm mô hình, gundam, siêu xe...">
+                        <button class="search-btn" id="siteSearchBtn" aria-label="Tìm kiếm"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#search"/></svg></button>
+                    </div>
+
+                    <ul class="menu-items">
+                        <li><a href="products-anime.html">Mô hình Anime</a></li>
+                        <li><a href="products-gundam.html">Gundam</a></li>
+                        <li><a href="products-car.html">Siêu xe</a></li>
+                        <li><a href="products-tools.html">Dụng cụ</a></li>
+                    </ul>
+                </div>
+
+                <a href="cart.html" class="cart">
+                    <span class="cart-icon"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#shopping-cart"/></svg></span>
+                    <span>Giỏ hàng</span>
+                    <span class="cart-count-badge" id="global-cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== BREADCRUMB ===== -->
+    <div class="breadcrumb">
+        <a href="index.html">Trang chủ</a>
+        <span>/</span>
+        <a href="products-anime.html" id="breadcrumbCategory">Sản phẩm</a>
+        <span>/</span>
+        <span id="breadcrumbName">Đang tải...</span>
+    </div>
+
+    <!-- ===== PRODUCT DETAIL (FLEXBOX) ===== -->
+    <div class="product-detail">
+        <div class="product-images">
+            <div class="main-image">
+                <img src="images/logo.png" alt="Sản phẩm" id="mainImage">
+            </div>
+        </div>
+
+        <!-- BÊN PHẢI: THÔNG TIN SẢN PHẨM -->
+        <div class="product-info">
+            <h1 class="product-title" id="productTitle">Đang tải sản phẩm...</h1>
+            <div class="product-tags" id="productTags"></div>
+
+            <div class="product-status">Đang kiểm tra...</div>
+            <div class="product-price" id="productPrice"></div>
+
+            <!-- Số lượng -->
+            <div class="quantity-section">
+                <span class="quantity-label">Số lượng:</span>
+                <div class="quantity-control">
+                    <button class="quantity-btn" onclick="changeQty(-1)">−</button>
+                    <input type="number" class="quantity-input" id="qtyInput" value="1" min="1">
+                    <button class="quantity-btn" onclick="changeQty(1)">+</button>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn-primary" onclick="addToCart()">
+                    THÊM VÀO GIỎ
+                </button>
+                <button class="btn-secondary" onclick="buyNow()">
+                    MUA NGAY
+                </button>
+                <button class="btn-secondary" data-wish="__current__" onclick="toggleWish('__current__', this, event)"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#heart"/></svg><span class="wish-label">Yêu thích</span></button>
+            </div>
+
+        </div>
+    </div> 
+
+    <!-- ===== PRODUCT DETAILS SECTION ===== -->
+    <div class="product-details-section">
+        <div class="details-tabs">
+            <button class="tab-btn active" onclick="switchTab(event, 'description')">Thông tin chi tiết</button>
+            <button class="tab-btn" onclick="switchTab(event, 'specs')">Thông số kỹ thuật</button>
+            <button class="tab-btn" onclick="switchTab(event, 'shippinc:\Users\PC\Downloads\SP-JSI05 test\SP-JSI05\adming')">Chính sách vận chuyển</button>
+            <button class="tab-btn" onclick="switchTab(event, 'reviews')">Đánh giá</button>
+        </div>
+
+        <div id="description" class="tab-content active">
+            <div id="descriptionContent">
+                <h3 id="descTitle">Đang tải...</h3>
+                <p id="descText">Đang tải nội dung sản phẩm...</p>
+            </div>
+
+            <!-- ===== SẢN PHẨM LIÊN QUAN (cùng chủ đề/series cụ thể, vd cùng One Piece, cùng Dragon Ball...) ===== -->
+            <div class="related-products" id="relatedProducts">
+                <h3 class="related-products-title">Sản phẩm liên quan</h3>
+                <div class="related-products-grid" id="relatedProductsGrid"></div>
+            </div>
+
+            <!-- ===== SẢN PHẨM ĐỀ XUẤT (không phân biệt danh mục/chủ đề) ===== -->
+            <div class="related-products" id="suggestedProducts">
+                <h3 class="related-products-title">Sản phẩm đề xuất</h3>
+                <div class="related-products-grid" id="suggestedProductsGrid"></div>
+            </div>
+        </div>
+
+        <div id="specs" class="tab-content">
+            <h3>Thông số kỹ thuật</h3>
+            <ul>
+                <li><strong>Tên sản phẩm:</strong> <span id="specName">Đang tải...</span></li>
+                <li><strong>Hãng:</strong> <span id="specBrand"></span></li>
+                <li><strong>Thông số:</strong> <span id="specDetail"></span></li>
+                <li><strong>Tình trạng:</strong> Hàng chính hãng, mới 100%</li>
+                <li><strong>Bảo hành:</strong> 6 tháng lỗi nhà sản xuất</li>
+            </ul>
+        </div>
+
+        <div id="shipping" class="tab-content">
+            <h3>Chính sách vận chuyển</h3>
+            <p><strong> Miễn phí vận chuyển:</strong></p>
+            <ul>
+                <li>Miễn phí ship toàn quốc cho đơn hàng trên 500.000đ</li>
+                <li>Đơn hàng dưới 500.000đ: Phí ship 30.000đ - 50.000đ tùy khu vực</li>
+            </ul>
+
+            <p><strong> Thời gian giao hàng:</strong></p>
+            <ul>
+                <li>Nội thành TP.HCM: 1-2 ngày</li>
+                <li>Các tỉnh thành khác: 3-5 ngày</li>
+                <li>Vùng sâu vùng xa: 5-7 ngày</li>
+            </ul>
+
+            <p><strong> Chính sách đổi trả:</strong></p>
+            <ul>
+                <li>Đổi trả trong vòng 7 ngày nếu sản phẩm lỗi do nhà sản xuất</li>
+                <li>Kiểm tra kỹ sản phẩm trước khi thanh toán</li>
+                <li>Quay video unbox để được hỗ trợ tốt nhất khi có vấn đề</li>
+            </ul>
+
+            <p><strong> Hình thức thanh toán:</strong></p>
+            <ul>
+                <li>COD (Thanh toán khi nhận hàng)</li>
+                <li>Chuyển khoản ngân hàng</li>
+                <li>Ví điện tử (MoMo, ZaloPay)</li>
+            </ul>
+        </div>
+        <div id="reviews" class="tab-content">
+            <div class="review-section">
+                <!-- Tóm tắt điểm trung bình - do renderReviews() trong products-detail.js đổ dữ liệu vào -->
+                <div class="review-summary" id="reviewSummary"></div>
+
+                <!-- Form gửi đánh giá mới (chỉ hiện nếu đã đăng nhập) -->
+                <div class="review-form" id="reviewFormWrap"></div>
+
+                <!-- Danh sách các đánh giá đã có -->
+                <div class="review-list" id="reviewList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Về chúng tôi</h4>
+                <p>MODEL SHOP - Chuyên cung cấp mô hình Gundam, Figure Anime, Siêu xe chính hãng.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Liên kết</h4>
+                <a href="index.html">Trang chủ</a>
+                <a href="#">Giới thiệu</a>
+                <a href="#">Liên hệ</a>
+            </div>
+            <div class="footer-col">
+                <h4>Hỗ trợ</h4>
+                <a href="#">Chính sách</a>
+                <a href="#">Giao hàng</a>
+                <a href="#">Đổi trả</a>
+                <a href="#">FAQ</a>
+            </div>
+            <div class="footer-col">
+                <h4>Liên hệ</h4>
+                <p class="footer-line"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#map-pin"/></svg>123 Đường ABC, Quận 1, TP.HCM</p>
+                <p class="footer-line"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#phone"/></svg>0383 21 07 08</p>
+                <p class="footer-line"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#mail"/></svg>modelshop@gmali.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 MODEL SHOP. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="chat-box"></div>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth-service.js"></script>
+    <script src="js/shop-core.js"></script>
+    <script src="js/ai-assistant.js"></script>
+    <script src="js/chat-widget.js"></script>
+    <script src="js/wishlist.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/products-detail.js"></script>
+    <script src="js/site-search.js"></script>
+    <script src="js/auth-header.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="js/seo-product.js"></script>
+    <script src="js/recently-viewed.js"></script>
+</body>
+
+</html>

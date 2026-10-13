@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Đăng nhập - MODEL SHOP</title>
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/signin.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <meta name="theme-color" content="#5a0000">
+    <meta name="description" content="Đăng nhập MODEL SHOP.">
+    <meta name="robots" content="noindex, follow">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="48x48" href="images/icons/favicon-48.png">
+    <link rel="apple-touch-icon" href="images/icons/apple-touch-icon.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="MODEL SHOP">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta property="og:site_name" content="MODEL SHOP">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Đăng nhập - MODEL SHOP">
+    <meta property="og:description" content="Đăng nhập MODEL SHOP.">
+    <meta property="og:image" content="images/banner1.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://firestore.googleapis.com">
+    <script src="js/pwa.js" defer></script>
+    <script src="js/a11y.js" defer></script>
+</head>
+
+<body class="auth-page">
+    <div class="header">
+        <a href="index.html" class="header-link">
+            <img src="images/logo.png" alt="Logo" class="auth-logo-img">
+            <div class="logo-text">MODEL<span>SHOP</span></div>
+        </a>
+    </div>
+
+    <div class="main-container">
+
+        <div class="form-section">
+            <div class="form-box">
+                <h2 class="form-title">ĐĂNG NHẬP TÀI KHOẢN</h2>
+
+                <form id="loginForm">
+                    <input type="text" id="email" placeholder="@gmail.com *" required>
+                    <input type="password" id="password" placeholder="Mật khẩu (6-18 ký tự) *" required>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="showPass" onclick="togglePassword()">
+                        <label for="showPass">Hiện mật khẩu</label>
+                    </div>
+
+                    <button type="submit" class="btn-primary">ĐĂNG NHẬP</button>
+                </form>
+
+                <div id="message" class="message"></div>
+
+                <div class="divider">Hoặc đăng nhập với</div>
+
+                <div class="social-login">
+                    <button type="button" class="social-btn facebook-btn">
+                        <img src="images/facebook-icon.png" alt="Facebook" class="social-icon">
+                        Facebook
+                    </button>
+                    <button type="button" class="social-btn gg-btn">
+                        <img src="images/google-icon.png" alt="GG" class="social-icon">
+                        Google
+                    </button>
+                </div>
+
+                <div class="switch-link">
+                    Chưa có tài khoản? <a href="signup.html">Đăng ký ngay</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="auth-right">
+            <div class="qr-section">
+                <h3>Quét mã QR để đăng nhập nhanh</h3>
+                <div class="qr-code">
+                    <div class="qr-placeholder">
+                        <img src="images/qr-code.png" alt="qr" class="qr-code">
+                        <p>Sử dụng ứng dụng MODEL SHOP</p>
+                        <p>để quét mã</p>
+                    </div>
+                </div>
+                <p class="qr-instruction">Mở ứng dụng MODEL SHOP và quét mã QR này để đăng nhập tự động</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth-service.js"></script>
+    <script src="js/signin.js"></script>
+</body>
+
+</html>

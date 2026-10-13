@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Đơn hàng của tôi - MODEL SHOP</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/orders.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <meta name="theme-color" content="#5a0000">
+    <meta name="description" content="Theo dõi và quản lý đơn hàng của bạn.">
+    <meta name="robots" content="noindex, follow">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="48x48" href="images/icons/favicon-48.png">
+    <link rel="apple-touch-icon" href="images/icons/apple-touch-icon.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="MODEL SHOP">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta property="og:site_name" content="MODEL SHOP">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Đơn hàng của tôi - MODEL SHOP">
+    <meta property="og:description" content="Theo dõi và quản lý đơn hàng của bạn.">
+    <meta property="og:image" content="images/banner1.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://firestore.googleapis.com">
+    <script src="js/pwa.js" defer></script>
+    <script src="js/a11y.js" defer></script>
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="top-bar">
+            <ul class="top-bar-items">
+                <li><a href="#">Thông báo</a></li>
+                <li class="auth">
+                    <a href="signin.html">Đăng nhập</a>
+                    <span class="slash">/</span>
+                    <a href="signup.html">Đăng ký</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="middle-bar">
+            <div class="top-row">
+                <a href="index.html" class="logo">
+                    <img src="images/logo.png" alt="Logo" class="logo-img">
+                    <div class="logo-text">MODEL<span>SHOP</span></div>
+                </a>
+
+                <div class="search-menu-wrapper">
+                    <div class="search-bar">
+                        <input type="text" id="siteSearchInput" placeholder="Tìm kiếm mô hình, gundam, siêu xe...">
+                        <button class="search-btn" id="siteSearchBtn" aria-label="Tìm kiếm"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#search"/></svg></button>
+                    </div>
+
+                    <ul class="menu-items">
+                        <li><a href="products-anime.html">Mô hình Anime</a></li>
+                        <li><a href="products-gundam.html">Gundam</a></li>
+                        <li><a href="products-car.html">Siêu xe</a></li>
+                        <li><a href="products-tools.html">Dụng cụ</a></li>
+                    </ul>
+                </div>
+
+                <a href="cart.html" class="cart">
+                    <span class="cart-icon"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#shopping-cart"/></svg></span>
+                    <span>Giỏ hàng</span>
+                    <span class="cart-count-badge" id="global-cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== MAIN ===== -->
+    <div class="orders-wrap">
+        <h1 class="orders-title">Đơn hàng của tôi</h1>
+        <p class="orders-subtitle">Theo dõi trạng thái và lịch sử tất cả các đơn hàng bạn đã đặt tại MODEL SHOP.</p>
+
+        <div class="orders-tabs" id="ordersTabs">
+            <button class="orders-tab active" data-filter="all">Tất cả</button>
+            <button class="orders-tab" data-filter="Chờ xác nhận">Chờ xác nhận</button>
+            <button class="orders-tab" data-filter="Đang giao">Đang giao</button>
+            <button class="orders-tab" data-filter="Hoàn thành">Hoàn thành</button>
+            <button class="orders-tab" data-filter="Yêu cầu trả hàng">Yêu cầu trả hàng</button>
+            <button class="orders-tab" data-filter="Đã trả hàng">Đã trả hàng</button>
+            <button class="orders-tab" data-filter="Đã hủy">Đã hủy</button>
+        </div>
+
+        <div id="ordersList"></div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Về chúng tôi</h4>
+                <p>MODEL SHOP - Chuyên cung cấp mô hình Gundam, Figure Anime, Siêu xe chính hãng.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Liên kết</h4>
+                <a href="index.html">Trang chủ</a>
+                <a href="profile.html">Hồ sơ của tôi</a>
+                <a href="cart.html">Giỏ hàng</a>
+            </div>
+            <div class="footer-col">
+                <h4>Hỗ trợ</h4>
+                <a href="#">Chính sách</a>
+                <a href="#">Giao hàng</a>
+                <a href="#">Đổi trả</a>
+                <a href="#">FAQ</a>
+            </div>
+            <div class="footer-col">
+                <h4>Liên hệ</h4>
+                <p class="footer-line"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#map-pin"/></svg>123 Đường ABC, Quận 1, TP.HCM</p>
+                <p class="footer-line"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#phone"/></svg>0385 21 07 08</p>
+                <p class="footer-line"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#mail"/></svg>modelshop@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 MODEL SHOP. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ===== FORM YÊU CẦU TRẢ HÀNG (lý do + ảnh minh chứng) ===== -->
+    <style>
+        .rt-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.65); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 16px; }
+        .rt-overlay.show { display: flex; }
+        .rt-box { background: #1c1c1c; color: #eee; border: 1px solid #333; border-radius: 14px; width: 100%; max-width: 480px; padding: 22px; max-height: 92vh; overflow-y: auto; }
+        .rt-box h3 { margin-bottom: 4px; }
+        .rt-box label { display: block; font-size: 13.5px; margin: 14px 0 6px; color: #ccc; }
+        .rt-box textarea { width: 100%; min-height: 90px; background: #2a2a2a; border: 1px solid #3a3a3a; color: #fff; border-radius: 8px; padding: 10px; font-family: inherit; font-size: 14px; resize: vertical; }
+        .rt-previews { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+        .rt-previews .pv { position: relative; width: 84px; height: 84px; }
+        .rt-previews img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; border: 1px solid #444; }
+        .rt-previews button { position: absolute; top: -6px; right: -6px; width: 20px; height: 20px; border-radius: 50%; border: none; background: #d32f2f; color: #fff; cursor: pointer; font-size: 12px; line-height: 1; }
+        .rt-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+        .rt-actions button { padding: 10px 18px; border-radius: 8px; border: none; cursor: pointer; font-weight: 600; }
+        .rt-cancel { background: #333; color: #eee; }
+        .rt-submit { background: #d32f2f; color: #fff; }
+        .rt-submit:disabled { opacity: .6; cursor: wait; }
+        .rt-hint { font-size: 12px; color: #888; margin-top: 4px; }
+        .order-return-imgs { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+        .order-return-imgs img { width: 72px; height: 72px; object-fit: cover; border-radius: 8px; border: 1px solid #444; cursor: zoom-in; }
+    </style>
+    <div class="rt-overlay" id="returnModal">
+        <div class="rt-box">
+            <h3>Yêu cầu trả hàng</h3>
+            <div class="rt-hint" id="returnOrderCode"></div>
+            <label for="returnReasonInput">Lý do trả hàng *</label>
+            <textarea id="returnReasonInput" placeholder="Vd: Sản phẩm bị vỡ/thiếu chi tiết, giao sai mẫu..."></textarea>
+            <label>Ảnh minh chứng (tối đa 3 ảnh)</label>
+            <input type="file" id="returnFiles" accept="image/*" multiple>
+            <div class="rt-hint">Ảnh được tự động nén trước khi gửi. Nên chụp rõ tình trạng sản phẩm/hộp.</div>
+            <div class="rt-previews" id="returnPreviews"></div>
+            <div class="rt-actions">
+                <button type="button" class="rt-cancel" id="returnCancelBtn">Huỷ</button>
+                <button type="button" class="rt-submit" id="returnSubmitBtn">Gửi yêu cầu</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/site-search.js"></script>
+    <script src="js/auth-header.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth-service.js"></script>
+    <script src="js/shop-core.js"></script>
+    <script src="js/ai-assistant.js"></script>
+    <script src="js/chat-widget.js"></script>
+    <script src="js/orders.js"></script>
+
+    <script src="js/bottom-nav.js"></script>
+</body>
+
+</html>

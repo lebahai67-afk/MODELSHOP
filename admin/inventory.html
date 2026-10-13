@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Kho hàng - Trang quản trị - MODEL SHOP</title>
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/admin-responsive.css">
+    <!--
+        Trang admin MẶC ĐỊNH ẨN nội dung (xem CSS .admin-shell { display: none } trong admin.css)
+        và chỉ hiện #authOverlay ở giữa màn hình. admin-guard.js (nạp cuối trang) sẽ kiểm tra quyền
+        truy cập:
+          - Nếu đúng admin -> thêm class .auth-ok vào <body> -> ẩn overlay, hiện nội dung.
+          - Nếu sai quyền  -> cập nhật nội dung overlay thành thông báo lỗi + nút đăng nhập,
+                              tự chuyển về trang đăng nhập sau 5 giây.
+    -->
+    <meta name="robots" content="noindex, nofollow">
+</head>
+
+<body>
+
+    <div class="auth-overlay" id="authOverlay">
+        <div class="spinner"></div>
+        <div class="msg" id="authMsg">Đang kiểm tra quyền truy cập...</div>
+        <div class="actions" id="authActions" style="display:none;">
+            <a href="../users/signin.html">Đăng nhập</a>
+            <a href="../users/index.html" class="secondary">Về trang chủ</a>
+        </div>
+    </div>
+
+    <div class="admin-shell">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Mở menu"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#menu"/></svg></button>
+        <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+        <aside class="admin-sidebar" id="adminSidebar">
+            <a href="../users/index.html" class="sidebar-logo">
+                <img src="../users/images/logo.png" alt="Logo">
+                <span><span class="hl">MODEL</span>SHOP</span>
+            </a>
+            <div class="sidebar-sub">/ Trang quản trị</div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#layout-dashboard"/></svg>Tổng quan</a>
+                <a href="statistics.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#chart-line"/></svg>Thống kê</a>
+                <a href="products.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#package"/></svg>Sản phẩm</a>
+                <a href="inventory.html" class="active"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#warehouse"/></svg>Kho hàng</a>
+                <a href="orders.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#truck"/></svg>Đơn hàng</a>
+                <a href="reviews.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#star"/></svg>Đánh giá</a>
+                <a href="vouchers.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#ticket"/></svg>Mã giảm giá</a>
+                <a href="chats.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#message-circle"/></svg>Hỏi đáp</a>
+                <a href="customers.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#users"/></svg>Khách hàng</a>
+                <a href="notifications.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#bell"/></svg>Thông báo</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="../users/index.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#store"/></svg>Xem cửa hàng</a>
+                <button class="logout-btn" id="logoutBtn"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#log-out"/></svg> Đăng xuất</button>
+            </div>
+        </aside>
+
+        <main class="admin-main">
+            <div class="admin-wrap">
+                <h1 class="admin-page-title">Kho hàng</h1>
+                <p style="color:#999; font-size:13px; margin-top:-16px; margin-bottom:24px;">
+                    Nhập kho khi có hàng về, xuất kho khi xuất bán thủ công / hàng lỗi / trả NCC...
+                    Mọi thao tác đều được ghi lại lịch sử bên dưới và cập nhật tồn kho ngay lập tức.
+                </p>
+
+                <div class="stats">
+                    <div class="stat-box">
+                        <div class="num" id="invTotalStock">0</div>
+                        <div class="label">Tổng số lượng tồn kho</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="num" id="invLowStockCount">0</div>
+                        <div class="label">Sắp hết hàng (≤ 5)</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="num" id="invOutOfStockCount">0</div>
+                        <div class="label">Đã hết hàng</div>
+                    </div>
+                </div>
+
+                <!-- ===== FORM NHẬP / XUẤT KHO NHANH ===== -->
+                <div class="admin-section">
+                    <div class="admin-section-head">
+                        <h3>Nhập kho / Xuất kho</h3>
+                    </div>
+
+                    <div class="stock-type-tabs" id="stockTypeTabs">
+                        <div class="stock-type-tab active in" data-type="in">Nhập kho</div>
+                        <div class="stock-type-tab out" data-type="out">Xuất kho</div>
+                    </div>
+
+                    <form id="stockForm" class="stock-form">
+                        <div class="form-field">
+                            <label>Sản phẩm *</label>
+                            <select id="s_product" required>
+                                <option value="">-- Chọn sản phẩm --</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label>Tồn hiện tại</label>
+                            <input type="text" id="s_currentStock" disabled placeholder="-">
+                        </div>
+                        <div class="form-field">
+                            <label>Số lượng *</label>
+                            <input type="number" id="s_quantity" min="1" step="1" required placeholder="vd: 10">
+                        </div>
+                        <div class="form-field">
+                            <label>Ghi chú</label>
+                            <input type="text" id="s_note" placeholder="vd: Nhập từ NCC, hàng lỗi...">
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="stockSubmitBtn">Nhập kho</button>
+                    </form>
+                </div>
+
+                <!-- ===== BẢNG TỒN KHO TOÀN BỘ SẢN PHẨM ===== -->
+                <div class="admin-section">
+                    <div class="admin-section-head">
+                        <h3>Tồn kho hiện tại</h3>
+                        <div class="form-field" style="min-width:240px; margin:0;">
+                            <input type="text" id="invSearchBox" placeholder="Tìm theo tên sản phẩm...">
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Ảnh</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Danh mục</th>
+                                <th>Tồn kho</th>
+                                <th>Trạng thái</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="stockTableBody">
+                            <!-- render bằng JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- ===== LỊCH SỬ NHẬP / XUẤT KHO ===== -->
+                <div class="admin-section">
+                    <div class="admin-section-head">
+                        <h3>Lịch sử nhập / xuất kho (real-time)</h3>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Mã phiếu</th>
+                                <th>Sản phẩm</th>
+                                <th>Loại</th>
+                                <th>Số lượng</th>
+                                <th>Tồn sau</th>
+                                <th>Ghi chú</th>
+                                <th>Thời gian</th>
+                            </tr>
+                        </thead>
+                        <tbody id="logTableBody">
+                            <!-- render bằng JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+    <script src="../users/js/firebase-config.js"></script>
+    <script src="../users/js/auth-service.js"></script>
+    <script src="js/admin-guard.js"></script>
+    <script src="../users/js/shop-core.js"></script>
+    <script src="js/admin-sidebar.js"></script>
+    <script src="js/inventory.js"></script>
+    <script src="js/admin-mobile.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+
+.branding-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.branding-logo {
+    width: 280px !important;
+    height: 250px !important;
+    margin-bottom: 30px;
+    object-fit: cover;
+}
+
+.brand-title {
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.brand-title span {
+    color: #dc2626;
+}
+
+.brand-slogan {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.features {
+    text-align: left;
+}
+
+.features div {
+    padding: 10px 0;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.features div::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    vertical-align: -4px;
+    background: #dc2626;
+    -webkit-mask: url(../images/icons/lucide/check.svg) center / contain no-repeat;
+    mask: url(../images/icons/lucide/check.svg) center / contain no-repeat;
+}

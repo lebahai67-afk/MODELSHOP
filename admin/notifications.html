@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Gửi thông báo - Trang quản trị - MODEL SHOP</title>
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/admin-responsive.css">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+
+<body>
+
+    <div class="auth-overlay" id="authOverlay">
+        <div class="spinner"></div>
+        <div class="msg" id="authMsg">Đang kiểm tra quyền truy cập...</div>
+        <div class="actions" id="authActions" style="display:none;">
+            <a href="../users/signin.html">Đăng nhập</a>
+            <a href="../users/index.html" class="secondary">Về trang chủ</a>
+        </div>
+    </div>
+
+    <div class="admin-shell">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Mở menu"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#menu"/></svg></button>
+        <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+        <aside class="admin-sidebar" id="adminSidebar">
+            <a href="../users/index.html" class="sidebar-logo">
+                <img src="../users/images/logo.png" alt="Logo">
+                <span><span class="hl">MODEL</span>SHOP</span>
+            </a>
+            <div class="sidebar-sub">/ Trang quản trị</div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#layout-dashboard"/></svg>Tổng quan</a>
+                <a href="statistics.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#chart-line"/></svg>Thống kê</a>
+                <a href="products.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#package"/></svg>Sản phẩm</a>
+                <a href="inventory.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#warehouse"/></svg>Kho hàng</a>
+                <a href="orders.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#truck"/></svg>Đơn hàng</a>
+                <a href="reviews.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#star"/></svg>Đánh giá</a>
+                <a href="vouchers.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#ticket"/></svg>Mã giảm giá</a>
+                <a href="chats.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#message-circle"/></svg>Hỏi đáp</a>
+                <a href="customers.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#users"/></svg>Khách hàng</a>
+                <a href="notifications.html" class="active"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#bell"/></svg>Thông báo</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="../users/index.html"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#store"/></svg>Xem cửa hàng</a>
+                <button class="logout-btn" id="logoutBtn"><svg class="icon" aria-hidden="true"><use href="../users/images/icons/lucide.svg#log-out"/></svg> Đăng xuất</button>
+            </div>
+        </aside>
+
+        <main class="admin-main">
+            <div class="admin-wrap">
+                <h1 class="admin-page-title">Gửi thông báo tới khách hàng</h1>
+                <p style="color:#999; font-size:13px; margin-top:-16px; margin-bottom:24px;">
+                    Thông báo sẽ được gửi tới TẤT CẢ tài khoản khách hàng hiện có, hiện ngay trong mục Thông báo
+                    của họ (không cần khách F5 lại trang).
+                </p>
+
+                <div class="admin-section" style="max-width:640px;">
+                    <form id="broadcastForm" class="form-grid">
+                        <div class="form-field full">
+                            <label>Tiêu đề *</label>
+                            <input type="text" id="f_title" required placeholder="vd: Sale off 20% toàn bộ Gundam">
+                        </div>
+                        <div class="form-field full">
+                            <label>Nội dung *</label>
+                            <textarea id="f_message" required rows="4" placeholder="Nội dung chi tiết thông báo..."></textarea>
+                        </div>
+                        <div class="form-field full">
+                            <label>Đường dẫn khi bấm vào (tuỳ chọn)</label>
+                            <input type="text" id="f_link" placeholder="vd: products-gundam.html">
+                        </div>
+                        <div class="form-field full" style="display:flex; justify-content:flex-end;">
+                            <button type="submit" class="btn btn-primary" style="width:auto;" id="sendBtn">
+                                Gửi thông báo tới tất cả khách hàng
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="admin-section">
+                    <div class="admin-section-head"><h3>Lịch sử đã gửi (trong phiên này)</h3></div>
+                    <div id="historyList" style="font-size:13.5px; color:#ccc;">Chưa gửi thông báo nào.</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+    <script src="../users/js/firebase-config.js"></script>
+    <script src="../users/js/auth-service.js"></script>
+    <script src="js/admin-guard.js"></script>
+    <script src="../users/js/shop-core.js"></script>
+    <script src="js/admin-sidebar.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/admin-mobile.js"></script>
+</body>
+
+</html>

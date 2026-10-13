@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Thanh toán - MODEL SHOP</title>
+
+    <link rel="stylesheet" href="css/checkout.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <meta name="theme-color" content="#5a0000">
+    <meta name="description" content="Hoàn tất đơn hàng tại MODEL SHOP.">
+    <meta name="robots" content="noindex, follow">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="48x48" href="images/icons/favicon-48.png">
+    <link rel="apple-touch-icon" href="images/icons/apple-touch-icon.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="MODEL SHOP">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta property="og:site_name" content="MODEL SHOP">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Thanh toán - MODEL SHOP">
+    <meta property="og:description" content="Hoàn tất đơn hàng tại MODEL SHOP.">
+    <meta property="og:image" content="images/banner1.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://firestore.googleapis.com">
+    <script src="js/pwa.js" defer></script>
+    <script src="js/a11y.js" defer></script>
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="top-bar">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Logo" class="logo-img">
+                <div class="logo-text">MODEL<span>SHOP</span></div>
+            </a>
+            <div style="font-size: 18px; font-weight: 600;">THANH TOÁN</div>
+        </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="main-content">
+        <h1 class="checkout-title">Thanh Toán Đơn Hàng</h1>
+
+        <div class="checkout-wrapper">
+            <!-- BÊN TRÁI: FORM THÔNG TIN -->
+            <div class="checkout-form">
+                <form id="checkoutForm">
+                    <div class="form-section">
+                        <h2 class="section-title">Thông tin giao hàng</h2>
+
+                        <div class="form-group">
+                            <label for="fullname">Họ và tên *</label>
+                            <input type="text" id="fullname" required placeholder="Nhập họ và tên">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Số điện thoại *</label>
+                                <input type="tel" id="phone" required placeholder="0123456789">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" placeholder="example@gmail.com">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">Địa chỉ *</label>
+                            <input type="text" id="address" required placeholder="Số nhà, tên đường">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">Tỉnh/Thành phố *</label>
+                                <!-- Danh sách 34 tỉnh/thành được đổ vào bằng JS (checkout.js), lấy từ data/vietnam-address.json -->
+                                <select id="city" required>
+                                    <option value="">-- Chọn --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="district">Xã/Phường *</label>
+                                <!-- Chỉ có dữ liệu SAU KHI đã chọn Tỉnh/Thành phố ở trên (xem hàm renderWardOptions trong checkout.js) -->
+                                <select id="district" required disabled>
+                                    <option value="">-- Chọn Tỉnh/Thành phố trước --</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Hiện khi chọn tỉnh/thành phố CHƯA có dữ liệu xã/phường đầy đủ -->
+                        <div class="form-group unsupported-city-notice" id="unsupportedNotice" style="display:none;">
+                            <svg class="icon icon-inline" aria-hidden="true"><use href="images/icons/lucide.svg#triangle-alert"/></svg> Hiện tại shop mới hỗ trợ giao hàng chi tiết đến từng xã/phường cho <strong>6 thành phố lớn</strong>
+                            (Hà Nội, TP.HCM, Đà Nẵng, Hải Phòng, Cần Thơ, Huế). Khu vực bạn chọn <strong>chưa được hỗ trợ đặt hàng</strong>,
+                            vui lòng chọn tỉnh/thành phố khác hoặc liên hệ shop để được hỗ trợ thêm.
+                        </div>
+
+                        <div class="form-group">
+                            <label for="note">Ghi chú đơn hàng</label>
+                            <textarea id="note" rows="3"
+                                placeholder="Ghi chú về đơn hàng, ví dụ: thời gian hay chỉ dẫn địa điểm giao hàng chi tiết hơn."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h2 class="section-title">Phương thức thanh toán</h2>
+
+                        <div class="payment-methods">
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="cod" checked>
+                                <div class="payment-content">
+                                    <div class="payment-icon"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#banknote"/></svg></div>
+                                    <div class="payment-text">
+                                        <div class="payment-name">Thanh toán khi nhận hàng (COD)</div>
+                                        <div class="payment-desc">Thanh toán bằng tiền mặt khi nhận hàng</div>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="bank">
+                                <div class="payment-content">
+                                    <div class="payment-icon"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#landmark"/></svg></div>
+                                    <div class="payment-text">
+                                        <div class="payment-name">Chuyển khoản ngân hàng</div>
+                                        <div class="payment-desc">Chuyển khoản qua Internet Banking</div>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="momo">
+                                <div class="payment-content">
+                                    <div class="payment-icon"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#wallet"/></svg></div>
+                                    <div class="payment-text">
+                                        <div class="payment-name">Ví điện tử MoMo</div>
+                                        <div class="payment-desc">Thanh toán qua ví MoMo</div>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="zalopay">
+                                <div class="payment-content">
+                                    <div class="payment-icon"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#wallet"/></svg></div>
+                                    <div class="payment-text">
+                                        <div class="payment-name">ZaloPay</div>
+                                        <div class="payment-desc">Thanh toán qua ví ZaloPay</div>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- BÊN PHẢI: ĐON HÀNG -->
+            <div class="order-summary">
+                <h2 class="section-title">Đơn hàng của bạn</h2>
+
+                <div id="orderItemsBox">
+                    <!-- Render động bằng JS từ giỏ hàng / sản phẩm vừa "Mua ngay" (js/checkout.js) -->
+                </div>
+
+                <div class="order-divider"></div>
+
+                <!-- Mã giảm giá -->
+                <div class="form-group" style="margin-bottom:14px;">
+                    <label for="voucherInput">Mã giảm giá</label>
+                    <div style="display:flex; gap:8px;">
+                        <input type="text" id="voucherInput" placeholder="Nhập mã (vd: SALE10)" style="flex:1; text-transform:uppercase;">
+                        <button type="button" id="applyVoucherBtn" class="btn btn-secondary" style="white-space:nowrap;">Áp dụng</button>
+                    </div>
+                    <div id="voucherMsg" style="font-size:13px; margin-top:6px;"></div>
+                </div>
+
+                <!-- Điểm thưởng -->
+                <div class="form-group" id="pointsWrap" style="display:none; margin-bottom:14px;">
+                    <label for="pointsInput">Dùng điểm thưởng (đang có <span id="pointsAvailable">0</span> điểm)</label>
+                    <div style="display:flex; gap:8px;">
+                        <input type="number" id="pointsInput" min="0" value="0" style="flex:1;">
+                        <button type="button" id="useMaxPointsBtn" class="btn btn-secondary" style="white-space:nowrap;">Dùng tối đa</button>
+                    </div>
+                    <div id="pointsMsg" style="font-size:13px; margin-top:6px; color:#999;"></div>
+                </div>
+
+                <div class="order-divider"></div>
+
+                <div class="order-row">
+                    <span>Tạm tính:</span>
+                    <span id="sumSubtotal">0đ</span>
+                </div>
+
+                <div class="order-row">
+                    <span>Phí vận chuyển:</span>
+                    <span id="sumShipping" class="text-success">Miễn phí</span>
+                </div>
+
+                <div class="order-row" id="discountRow" style="display:none;">
+                    <span>Giảm giá (mã):</span>
+                    <span id="sumDiscount" class="text-success">0đ</span>
+                </div>
+
+                <div class="order-row" id="pointsDiscountRow" style="display:none;">
+                    <span>Giảm giá (điểm thưởng):</span>
+                    <span id="sumPointsDiscount" class="text-success">0đ</span>
+                </div>
+
+                <div class="order-divider"></div>
+
+                <div class="order-total">
+                    <span>Tổng cộng:</span>
+                    <span id="sumTotal">0đ</span>
+                </div>
+
+                <div class="order-actions">
+                    <a href="cart.html" class="btn btn-secondary btn-with-icon"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#arrow-left"/></svg>Quay lại giỏ hàng</a>
+                    <button type="submit" form="checkoutForm" class="btn btn-primary" id="placeOrderBtn">Đặt hàng</button>
+                </div>
+
+                <div class="security-note">
+                    <svg class="icon icon-inline" aria-hidden="true"><use href="images/icons/lucide.svg#lock"/></svg> Thông tin của bạn được bảo mật
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Về chúng tôi</h4>
+                <p>MODEL SHOP - Chuyên cung cấp mô hình Gundam, Figure Anime, Siêu xe chính hãng.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Liên kết</h4>
+                <a href="index.html">Trang chủ</a>
+                <a href="about.html">Giới thiệu</a>
+                <a href="contact.html">Liên hệ</a>
+            </div>
+            <div class="footer-col">
+                <h4>Hỗ trợ</h4>
+                <a href="#">Chính sách</a>
+                <a href="#">Giao hàng</a>
+                <a href="#">Đổi trả</a>
+                <a href="#">FAQ</a>
+            </div>
+            <div class="footer-col">
+                <h4>Liên hệ</h4>
+                <p class="footer-line"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#map-pin"/></svg>123 Đường ABC, Quận 1, TP.HCM</p>
+                <p class="footer-line"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#phone"/></svg>0385 21 07 08</p>
+                <p class="footer-line"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#mail"/></svg>MODELSHOP@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 MODEL SHOP. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="chat-box"></div>
+    
+    <!-- ===== JAVASCRIPT ===== -->
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth-service.js"></script>
+    <script src="js/shop-core.js"></script>
+    <script src="js/ai-assistant.js"></script>
+    <script src="js/chat-widget.js"></script>
+    <script src="js/checkout.js"></script>
+    
+
+</body>
+
+</html>

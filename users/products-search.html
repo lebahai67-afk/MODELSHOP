@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Tìm kiếm sản phẩm - MODEL SHOP</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/products.css">
+    <link rel="stylesheet" href="css/products-anime.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <meta name="theme-color" content="#5a0000">
+    <meta name="description" content="Tìm kiếm mô hình, Gundam, siêu xe và dụng cụ tại MODEL SHOP.">
+    <meta name="robots" content="noindex, follow">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="48x48" href="images/icons/favicon-48.png">
+    <link rel="apple-touch-icon" href="images/icons/apple-touch-icon.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="MODEL SHOP">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta property="og:site_name" content="MODEL SHOP">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Tìm kiếm sản phẩm - MODEL SHOP">
+    <meta property="og:description" content="Tìm kiếm mô hình, Gundam, siêu xe và dụng cụ tại MODEL SHOP.">
+    <meta property="og:image" content="images/banner1.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://firestore.googleapis.com">
+    <script src="js/pwa.js" defer></script>
+    <script src="js/a11y.js" defer></script>
+</head>
+
+<body>
+    <!-- ===== HEADER ===== -->
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <!-- TOP BAR -->
+        <div class="top-bar">
+            <ul class="top-bar-items">
+                <li><a href="#">Thông báo</a></li>
+                <li class="auth">
+                    <a href="signin.html">Đăng nhập</a>
+                    <span class="slash">/</span>
+                    <a href="signiup.html">Đăng ký</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="middle-bar">
+            <div class="top-row">
+                <a href="index.html" class="logo">
+                    <img src="images/logo.png" alt="MODEL SHOP" class="logo-img">
+                    <div class="logo-text">
+                        MODEL <span>SHOP</span>
+                    </div>
+                </a>
+
+                <div class="search-menu-wrapper">
+                    <div class="search-bar">
+                        <input type="text" id="siteSearchInput" placeholder="Tìm kiếm sản phẩm...">
+                        <button class="search-btn" id="siteSearchBtn" aria-label="Tìm kiếm"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#search"/></svg></button>
+                    </div>
+
+                    <ul class="menu-items">
+                        <li><a href="products-anime.html">Mô hình Anime</a></li>
+                        <li><a href="products-gundam.html">Gundam</a></li>
+                        <li><a href="products-car.html">Siêu xe</a></li>
+                        <li><a href="products-tools.html">Dụng cụ</a></li>
+                    </ul>
+                </div>
+
+                <a href="cart.html" class="cart">
+                    <span class="cart-icon"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#shopping-cart"/></svg></span>
+                    <span>Giỏ hàng</span>
+                    <span class="cart-count-badge" id="global-cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== BREADCRUMB ===== -->
+    <div class="breadcrumb">
+        <a href="index.html">Trang chủ</a> / Kết quả tìm kiếm
+    </div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="main-content">
+        <!-- ===== SIDEBAR FILTER ===== -->
+        <aside class="sidebar">
+            <div class="filter-box">
+                <h3>BỘ LỌC SẢN PHẨM</h3>
+
+                <!-- Danh mục -->
+                <div class="filter-group">
+                    <h4>Danh mục</h4>
+                    <label>
+                        <input type="checkbox" name="cat" value="anime">
+                        Mô hình Anime
+                    </label>
+                    <label>
+                        <input type="checkbox" name="cat" value="gundam">
+                        Gundam
+                    </label>
+                    <label>
+                        <input type="checkbox" name="cat" value="car">
+                        Siêu xe
+                    </label>
+                    <label>
+                        <input type="checkbox" name="cat" value="tools">
+                        Dụng cụ
+                    </label>
+                </div>
+
+                <!-- Price Range -->
+                <div class="filter-group">
+                    <h4>Khoảng giá</h4>
+                    <div class="price-range">
+                        <input type="number" id="priceFrom" placeholder="Từ" min="0">
+                        <span>-</span>
+                        <input type="number" id="priceTo" placeholder="Đến" min="0">
+                    </div>
+                </div>
+
+                <button class="filter-btn">ÁP DỤNG BỘ LỌC</button>
+            </div>
+        </aside>
+
+        <!-- ===== PRODUCTS SECTION ===== -->
+        <div class="products-section">
+            <div class="products-header">
+                <h1 class="products-title" id="searchTitle">Kết quả tìm kiếm</h1>
+                <select class="sort-select">
+                    <option>Sắp xếp: Mặc định</option>
+                    <option>Giá: Thấp đến cao</option>
+                    <option>Giá: Cao đến thấp</option>
+                    <option>Tên: A-Z</option>
+                    <option>Tên: Z-A</option>
+                    <option>Mới nhất</option>
+                </select>
+            </div>
+
+            <div class="products-grid" id="search-grid"></div>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Về chúng tôi</h4>
+                <p>MODEL SHOP - Chuyên cung cấp mô hình Gundam, Figure Anime, Siêu xe chính hãng.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Liên kết</h4>
+                <a href="index.html">Trang chủ</a>
+                <a href="about.html">Giới thiệu</a>
+                <a href="contact.html">Liên hệ</a>
+            </div>
+            <div class="footer-col">
+                <h4>Hỗ trợ</h4>
+                <a href="#">Chính sách</a>
+                <a href="#">Giao hàng</a>
+                <a href="#">Đổi trả</a>
+                <a href="#">FAQ</a>
+            </div>
+            <div class="footer-col">
+                <h4>Liên hệ</h4>
+                <p class="footer-line"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#map-pin"/></svg>123 Đường ABC, Quận 1, TP.HCM</p>
+                <p class="footer-line"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#phone"/></svg>0385 21 07 08</p>
+                <p class="footer-line"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#mail"/></svg>MODELSHOP@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 MODEL SHOP. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="chat-box"></div>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth-service.js"></script>
+    <script src="js/shop-core.js"></script>
+    <script src="js/ai-assistant.js"></script>
+    <script src="js/chat-widget.js"></script>
+    <script src="js/wishlist.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/site-search.js"></script>
+    <script src="js/auth-header.js"></script>
+
+    <script src="js/products-search.js"></script>
+    <script src="js/mobile-ui.js"></script>
+    <script src="js/bottom-nav.js"></script>
+</body>
+
+</html>

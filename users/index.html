@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>MODEL SHOP - Mô hình anime, Gundam, siêu xe chính hãng</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <meta name="theme-color" content="#5a0000">
+    <meta name="description" content="Cửa hàng mô hình anime, Gundam, siêu xe và dụng cụ chính hãng. Hàng mới về, pre-order, giao hàng toàn quốc.">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="48x48" href="images/icons/favicon-48.png">
+    <link rel="apple-touch-icon" href="images/icons/apple-touch-icon.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="MODEL SHOP">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta property="og:site_name" content="MODEL SHOP">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="MODEL SHOP - Mô hình anime, Gundam, siêu xe chính hãng">
+    <meta property="og:description" content="Cửa hàng mô hình anime, Gundam, siêu xe và dụng cụ chính hãng. Hàng mới về, pre-order, giao hàng toàn quốc.">
+    <meta property="og:image" content="images/banner1.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://firestore.googleapis.com">
+    <link rel="preload" as="image" href="images/banner1.jpg" fetchpriority="high">
+    <script src="js/pwa.js" defer></script>
+    <script src="js/a11y.js" defer></script>
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <!-- TOP BAR -->
+        <div class="top-bar">
+            <ul class="top-bar-items">
+                <li><a href="#">Thông báo</a></li>
+                <li class="auth">
+                    <a href="signin.html">Đăng nhập</a>
+                    <span class="slash">/</span>
+                    <a href="signup.html">Đăng ký</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- MIDDLE BAR -->
+        <div class="middle-bar">
+            <div class="top-row">
+                <!-- LOGO -->
+                <a href="index.html" class="logo">
+                    <img src="images/logo.png" alt="Logo" class="logo-img">
+                    <div class="logo-text">MODEL<span>SHOP</span></div>
+                </a>
+
+                <!-- SEARCH + MENU WRAPPER -->
+                <div class="search-menu-wrapper">
+                    <!-- SEARCH BAR -->
+                    <div class="search-bar">
+                        <input type="text" id="siteSearchInput" placeholder="Tìm kiếm mô hình, gundam, siêu xe...">
+                        <button class="search-btn" id="siteSearchBtn" aria-label="Tìm kiếm"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#search"/></svg></button>
+                    </div>
+
+                    <!-- MENU -->
+                    <ul class="menu-items">
+                        <li><a href="products-anime.html">Mô hình Anime</a></li>
+                        <li><a href="products-gundam.html">Gundam</a></li>
+                        <li><a href="products-car.html">Siêu xe</a></li>
+                        <li><a href="products-tools.html">Dụng cụ</a></li>
+                    </ul>
+                </div>
+
+                <!-- CART -->
+                <a href="cart.html" class="cart">
+                    <span class="cart-icon"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#shopping-cart"/></svg></span>
+                    <span>Giỏ hàng</span>
+                    <span class="cart-count-badge" id="global-cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== BANNER ===== -->
+    <section class="banner-section">
+        <div class="banner-slider">
+            <div class="banner-main">
+                <img src="images/banner1.jpg" alt="Banner chính" fetchpriority="high">
+            </div>
+            <div class="banner-side">
+                <div class="banner-side-item">
+                    <img src="images/banner2.jpg" alt="Banner 2" loading="lazy">
+                </div>
+                <div class="banner-side-item">
+                    <img src="images/banner3.jpg" alt="Banner 3" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MÔ HÌNH ANIME ===== -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Mô hình Anime</h2>
+                <a href="products-anime.html" class="view-all">Xem tất cả <svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#chevron-right"/></svg></a>
+            </div>
+
+            <div class="products">
+                <a href="javascript:void(0)" class="product" onclick="goToDetail('anime-01')">
+                    <img src="images/kaido-luffy1.jpg" srcset="images/thumbs/kaido-luffy1.webp 480w, images/kaido-luffy1.jpg 1000w" sizes="(max-width: 768px) 46vw, 280px" alt="Anime 1" loading="lazy" decoding="async">
+                    <h3>Kaido vs Luffy - Ventus Studio</h3>
+                    <div class="price">13,400,000đ</div>
+                </a>
+
+                <a href="javascript:void(0)" class="product" onclick="goToDetail('anime-02')">
+                    <img src="images/product2.jpg" srcset="images/thumbs/product2.webp 480w, images/product2.jpg 1000w" sizes="(max-width: 768px) 46vw, 280px" alt="Anime 2" loading="lazy" decoding="async">
+                    <h3>Son Goku SSJ vs Frieza 1/4 - KRC Studio</h3>
+                    <div class="price">4,200,000đ</div>
+                </a>
+
+                <a href="javascript:void(0)" class="product" onclick="goToDetail('anime-03')">
+                    <img src="images/product3.jpg" srcset="images/thumbs/product3.webp 480w, images/product3.jpg 1000w" sizes="(max-width: 768px) 46vw, 280px" alt="Anime 3" loading="lazy" decoding="async">
+                    <h3>Fushiguro Toji - RD Studio</h3>
+                    <div class="price">8,900,000đ</div>
+                </a>
+
+                <a href="javascript:void(0)" class="product" onclick="goToDetail('anime-04')">
+                    <img src="images/product4.webp" srcset="images/thumbs/product4.webp 480w, images/product4.webp 1000w" sizes="(max-width: 768px) 46vw, 280px" alt="Anime 4" loading="lazy" decoding="async">
+                    <h3>Natsu Dragneel - GU GU Studio</h3>
+                    <div class="price">7,500,000đ</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== GUNDAM ===== -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Gundam</h2>
+                <a href="products-gundam.html" class="view-all">Xem tất cả <svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#chevron-right"/></svg></a>
+            </div>
+
+            <div class="products">
+                <a href="javascript:void(0)" class="product" onclick="goToDetail('gundam-01')">
+                    <img src="images/product5.webp" srcset="images/thumbs/product5.webp 480w, images/product5.webp 1000w" sizes="(max-width: 768px) 46vw, 280px" alt="Gundam 1" loading="lazy" decoding="async">
+                    <h3>RG 1/144 RX-78-2 Gundam Ver. 2.0</h3>
+                    <div class="price">1,360,000đ</div>
+                </a>
+
+                <a href="javascript:void(0)" class="product" onclick="goToDetail('gundam-02')">
+                    <img src="images/product6.webp" srcset="images/thumbs/product6.webp 480w, images/product6.webp 1000w" sizes="(max-width: 768px) 46vw, 280px" alt="Gundam 2" loading="lazy" decoding="async">
+                    <h3>MNP-XH05 TRIỆU VÂN ZHAOYUN MOTOR NUCLEAR</h3>
+                    <div class="price">1,600,000đ</div>
+                </a>
+
+                <a href="javascript:void(0)" class="product" onclick="goToDetail('gundam-03')">
+                    <img src="images/product7.jpg" srcset="images/thumbs/product7.webp 480w, images/product7.jpg 1000w" sizes="(max-width: 768px) 46vw, 280px" alt="Gundam 3" loading="lazy" decoding="async">
+                    <h3>Gundam Barbatos Lupus Rex Limited Color Edition</h3>
+                    <div class="price">5,600,000đ</div>
+                </a>
+
+                <a href="javascript:void(0)" class="product" onclick="goToDetail('gundam-04')">
+                    <img src="images/product8.webp" srcset="images/thumbs/product8.webp 480w, images/product8.webp 1000w" sizes="(max-width: 768px) 46vw, 280px" alt="Gundam 4" loading="lazy" decoding="async">
+                    <h3>PG 1/60 Gundam Astray Red Frame</h3>
+                    <div class="price">4,320,000đ</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SIÊU XE ===== -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Siêu xe</h2>
+                <a href="products-car.html" class="view-all">Xem tất cả <svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#chevron-right"/></svg></a>
+            </div>
+
+            <div class="products">
+                <a href="javascript:void(0)" class="product" onclick="goToDetail('car-01')">
+                    <img src="images/product9.jpg" srcset="images/thumbs/product9.webp 480w, images/product9.jpg 1000w" sizes="(max-width: 768px) 46vw, 280px" alt="Car 1" loading="lazy" decoding="async">
+                    <h3>Lamborghini Aventador 1:18</h3>
+                    <div class="price">3,200,000đ</div>
+                </a>
+
+                <a href="javascript:void(0)" class="product" onclick="goToDetail('car-02')">
+                    <img src="images/product10.jpg" srcset="images/thumbs/product10.webp 480w, images/product10.jpg 1000w" sizes="(max-width: 768px) 46vw, 280px" alt="Car 2" loading="lazy" decoding="async">
+                    <h3>Ferrari F8 Tributo 1:18</h3>
+                    <div class="price">3,500,000đ</div>
+                </a>
+
+                <a href="javascript:void(0)" class="product" onclick="goToDetail('car-03')">
+                    <img src="images/product11.jpg" srcset="images/thumbs/product11.webp 480w, images/product11.jpg 1000w" sizes="(max-width: 768px) 46vw, 280px" alt="Car 3" loading="lazy" decoding="async">
+                    <h3>BMW M8 Competition 1:18</h3>
+                    <div class="price">2,800,000đ</div>
+                </a>
+
+                <a href="javascript:void(0)" class="product" onclick="goToDetail('car-04')">
+                    <img src="images/product12.jpg" srcset="images/thumbs/product12.webp 480w, images/product12.jpg 1000w" sizes="(max-width: 768px) 46vw, 280px" alt="Car 4" loading="lazy" decoding="async">
+                    <h3>Porsche 911 GT3 RS 1:18</h3>
+                    <div class="price">3,100,000đ</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DỤNG CỤ ===== -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Dụng cụ</h2>
+                <a href="products-tools.html" class="view-all">Xem tất cả <svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#chevron-right"/></svg></a>
+            </div>
+
+            <div class="products">
+                <a href="javascript:void(0)" class="product" onclick="goToDetail('tools-01')">
+                    <img src="images/product13.webp" srcset="images/thumbs/product13.webp 480w, images/product13.webp 1000w" sizes="(max-width: 768px) 46vw, 280px" alt="Tool 1" loading="lazy" decoding="async">
+                    <h3>DỤNG CỤ MÔ HÌNH GUNDAM KÈM CẮT NANYE</h3>
+                    <div class="price">150,000đ</div>
+                </a>
+
+                <a href="javascript:void(0)" class="product" onclick="goToDetail('tools-02')">
+                    <img src="images/product14.webp" srcset="images/thumbs/product14.webp 480w, images/product14.webp 1000w" sizes="(max-width: 768px) 46vw, 280px" alt="Tool 2" loading="lazy" decoding="async">
+                    <h3>Hộp đựng và bảo quản dụng cụ lắp ráp</h3>
+                    <div class="price">340,000đ</div>
+                </a>
+
+                <a href="javascript:void(0)" class="product" onclick="goToDetail('tools-03')">
+                    <img src="images/product15.webp" srcset="images/thumbs/product15.webp 480w, images/product15.webp 1000w" sizes="(max-width: 768px) 46vw, 280px" alt="Tool 3" loading="lazy" decoding="async">
+                    <h3>Dụng cụ dũa mông tay đánh bóng FABIYAN</h3>
+                    <div class="price">450,000đ</div>
+                </a>
+
+                <a href="javascript:void(0)" class="product" onclick="goToDetail('tools-04')">
+                    <img src="images/product16.jpg" srcset="images/thumbs/product16.webp 480w, images/product16.jpg 1000w" sizes="(max-width: 768px) 46vw, 280px" alt="Tool 4" loading="lazy" decoding="async">
+                    <h3>Dao gọt nhựa thừa (Bộ 13 lưỡi-3 cán)</h3>
+                    <div class="price">190,000đ</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Về chúng tôi</h4>
+                <p>MODEL SHOP - Chuyên cung cấp mô hình Gundam, Figure Anime, Siêu xe chính hãng.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Liên kết</h4>
+                <a href="index.html">Trang chủ</a>
+                <a href="about.html">Giới thiệu</a>
+                <a href="contact.html">Liên hệ</a>
+            </div>
+            <div class="footer-col">
+                <h4>Hỗ trợ</h4>
+                <a href="#">Chính sách</a>
+                <a href="#">Giao hàng</a>
+                <a href="#">Đổi trả</a>
+                <a href="#">FAQ</a>
+            </div>
+            <div class="footer-col">
+                <h4>Liên hệ</h4>
+                <p class="footer-line"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#map-pin"/></svg>123 Đường ABC, Quận 1, TP.HCM</p>
+                <p class="footer-line"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#phone"/></svg>0385 21 07 08</p>
+                <p class="footer-line"><svg class="icon" aria-hidden="true"><use href="images/icons/lucide.svg#mail"/></svg>modelshop@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 MODEL SHOP. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Chat Box -->
+    <div class="chat-box"></div>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth-service.js"></script>
+    <script src="js/shop-core.js"></script>
+    <script src="js/ai-assistant.js"></script>
+    <script src="js/chat-widget.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/site-search.js"></script>
+    <script src="js/auth-header.js"></script>
+
+    <script src="js/recently-viewed.js"></script>
+    <script src="js/bottom-nav.js"></script>
+</body>
+
+</html>

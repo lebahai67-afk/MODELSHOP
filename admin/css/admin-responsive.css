@@ -1,0 +1,150 @@
+/* ============================================================
+   admin-responsive.css — Tối ưu trang quản trị cho điện thoại/tablet
+   Nạp SAU admin.css. Chỉ chứa media query nên desktop không đổi.
+   (Sidebar dạng ngăn kéo đã có sẵn trong admin.css; file này bổ sung
+    bảng cuộn ngang, thẻ thống kê, popup, form, tab, biểu đồ, chat.)
+   ============================================================ */
+
+/* Khung cuộn ngang cho bảng (do js/admin-mobile.js bọc quanh <table>) */
+.table-scroll {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 10px;
+}
+
+@media (max-width: 900px) {
+    body { overflow-x: hidden; overflow-x: clip; }
+
+    .sidebar-toggle {
+        top: calc(10px + env(safe-area-inset-top, 0px));
+        left: 12px;
+        width: 44px;
+        height: 44px;
+    }
+
+    .admin-sidebar {
+        width: min(82vw, 290px);
+        overflow-y: auto;
+        padding-top: calc(60px + env(safe-area-inset-top, 0px)); /* chừa chỗ cho nút menu */
+    }
+
+    .sidebar-nav a { min-height: 44px; }
+
+    .admin-main { padding-top: calc(60px + env(safe-area-inset-top, 0px)); }
+
+    .admin-wrap { margin: 14px auto; padding: 0 14px 40px; }
+    .admin-page-title { font-size: 21px; margin-bottom: 16px; }
+
+    .admin-section { padding: 14px; margin-bottom: 18px; border-radius: 10px; }
+    .admin-section, .admin-wrap { min-width: 0; }
+    .admin-section-head { gap: 8px; flex-wrap: wrap; }
+    .admin-section-head .chart-range-tabs,
+    .admin-section-head .order-tabs { flex: 1 1 100%; min-width: 0; max-width: 100%; }
+    .admin-section-head h3 { font-size: 16px; }
+    .admin-section-head > * { max-width: 100%; }
+
+    /* Thẻ thống kê: 2 cột */
+    .stats { gap: 10px; margin-bottom: 18px; }
+    .stat-box { flex: 1 1 calc(50% - 10px); min-width: 0; padding: 14px 10px; }
+    .stat-box .num { font-size: 20px; word-break: break-word; }
+
+    /* Bảng: cuộn ngang, giữ chiều rộng tối thiểu để không bị bóp chữ */
+    table { min-width: 560px; }
+    th, td { padding: 10px 10px; font-size: 13px; }
+    td { white-space: nowrap; }
+    td[style*="white-space:normal"] { min-width: 200px; }
+
+    /* Dải tab/lọc: vuốt ngang thay vì xuống nhiều dòng */
+    .order-tabs,
+    .chart-range-tabs,
+    .stock-type-tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+        padding-bottom: 4px;
+    }
+    .order-tabs::-webkit-scrollbar,
+    .chart-range-tabs::-webkit-scrollbar { display: none; }
+    .order-tab, .chart-range-tabs button { flex-shrink: 0; white-space: nowrap; min-height: 38px; }
+    .stock-type-tab { flex-shrink: 0; min-width: 120px; }
+
+    /* Ô lọc/tìm kiếm có min-width inline: cho co giãn theo màn hình */
+    .form-field[style*="min-width"] { min-width: 0 !important; flex: 1 1 100%; }
+
+    /* Form + nút bấm: dễ chạm, không bị iPhone tự zoom */
+    .form-field input,
+    .form-field select,
+    .form-field textarea,
+    select, input[type="text"], input[type="number"], input[type="search"],
+    input[type="email"], input[type="date"] {
+        font-size: 16px;
+        min-height: 44px;
+    }
+    .form-field textarea { min-height: 80px; }
+    .btn { min-height: 40px; padding: 8px 14px; }
+    .row-actions { flex-wrap: wrap; }
+    .row-actions .btn { min-height: 36px; padding: 6px 12px; }
+    .form-actions { flex-wrap: wrap; }
+    .form-actions .btn { flex: 1 1 120px; min-height: 44px; }
+
+    /* Popup: dạng bottom sheet */
+    .modal-overlay { align-items: flex-end; padding: 0; }
+    .modal-box {
+        max-width: 100% !important;
+        max-height: 92vh;
+        max-height: 92dvh;
+        padding: 20px 16px calc(20px + env(safe-area-inset-bottom, 0px));
+        border-radius: 18px 18px 0 0;
+    }
+
+    /* Biểu đồ */
+    .chart-box { height: 240px; }
+    .chart-box.small { height: 220px; }
+
+    /* Xếp hạng khách hàng / sản phẩm bán chạy */
+    .tc-row { padding: 10px; gap: 8px; }
+    .tc-total { font-size: 13px; }
+    .top-products-showcase { gap: 10px; }
+
+    /* Hỏi đáp (chat) */
+    .chat-layout { height: auto; }
+    .chat-main { height: 65vh; height: 65dvh; min-height: 360px; }
+    .chat-threads { max-height: 160px; }
+    .bubble { max-width: 85%; }
+    .chat-input input { font-size: 16px; }
+
+    /* Thông báo: form không bị giới hạn inline */
+    .admin-section[style*="max-width"] { max-width: 100% !important; }
+}
+
+@media (max-width: 480px) {
+    .admin-wrap { padding: 0 10px 32px; }
+    .admin-page-title { font-size: 19px; }
+    .stat-box .num { font-size: 18px; }
+    .stat-box .label { font-size: 12px; }
+    .top-products-showcase { grid-template-columns: repeat(2, 1fr); }
+    .stock-form { grid-template-columns: 1fr; }
+}
+
+@media (hover: none) {
+    .tp-card:hover { transform: none; }
+}
+
+/* Xem trước ảnh phụ trong form sản phẩm */
+.extra-preview { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.extra-preview img { width: 72px; height: 72px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); }
+
+
+/* ===== ICON LUCIDE (admin) — sprite dùng chung ../users/images/icons/lucide.svg ===== */
+.icon { display: inline-block; width: 1.1em; height: 1.1em; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vertical-align: -0.2em; pointer-events: none; }
+.icon-lg { width: 1.6em; height: 1.6em; vertical-align: -0.35em; margin-right: 6px; }
+.sidebar-nav a { display: flex; align-items: center; gap: 10px; }
+.sidebar-nav a .icon { width: 18px; height: 18px; vertical-align: 0; opacity: 0.9; }
+.sidebar-toggle { display: inline-flex; align-items: center; justify-content: center; }
+.sidebar-toggle .icon { width: 22px; height: 22px; vertical-align: 0; }
+.stars { display: inline-flex; align-items: center; gap: 2px; vertical-align: middle; color: #f5a623; }
+.star { position: relative; display: inline-block; width: 1em; height: 1em; }
+.star .icon { position: absolute; inset: 0; width: 100%; height: 100%; vertical-align: 0; }
+.star .icon.on { fill: currentColor; }
+.star .icon.off { color: #5c5c5c; }
